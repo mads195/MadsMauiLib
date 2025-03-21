@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MadsMauiLib.Controls.SectionTitle">
-    <Grid Padding="0" RowSpacing="1" BackgroundColor="{Binding SectionTitleBackgroundColor}">
+             x:Class="Mads195.MadsMauiLib.Controls.SectionTitle">
+    <Grid Padding="0" RowSpacing="1" BackgroundColor="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Padding="20,0,20,0" BackgroundColor="Transparent">
-            <Label Text="{Binding Title, Source={x:Reference SectionTitle}}"
-                   VerticalOptions="Center"
-                   FontAttributes="Bold"
-                   TextColor="{Binding TextColor}"/>
+            <Label x:Name="TitleLabel" 
+               Text="{Binding Text}"
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" />
         </Grid>
     </Grid>
 </ContentView>

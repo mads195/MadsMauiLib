@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <NetVersion>net9.0</NetVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' == 'Release - net8.0'">
+    <NetVersion>net8.0</NetVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <NetVersion>net9.0</NetVersion>
+  </PropertyGroup>
+</Project>

@@ -1,33 +1,25 @@
-using MadsMauiLib.ViewModels;
-
-namespace MadsMauiLib.Controls;
+namespace Mads195.MadsMauiLib.Controls;
 
 public partial class SectionTitle : ContentView
 {
-    public static readonly BindableProperty SectionTitleBackgroundColorProperty =
-        BindableProperty.Create(nameof(SectionTitleBackgroundColor),
-                                typeof(Color),
-                                typeof(SectionTitle),
-                                Colors.Transparent,
-                                propertyChanged: OnBackgroundColorChanged);
+    public static readonly BindableProperty TextProperty =
+        BindableProperty.Create(nameof(Text), typeof(string), typeof(SectionTitle), string.Empty, propertyChanged: OnTextChanged);
 
-    public Color SectionTitleBackgroundColor
+    public string Text
     {
-        get => (Color)GetValue(SectionTitleBackgroundColorProperty);
-        set => SetValue(SectionTitleBackgroundColorProperty, value);
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
     }
-
     public SectionTitle()
-    {
-        InitializeComponent();
-        BindingContext = new SectionTitleViewModel();
+	{
+		InitializeComponent();
+        BindingContext = this;
     }
-
-    private static void OnBackgroundColorChanged(BindableObject bindable, object oldValue, object newValue)
+    private static void OnTextChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        if (bindable is SectionTitle control)
+        if (bindable is SectionTitle sectionTitle && newValue is string newText)
         {
-            control.BackgroundColor = (Color)newValue;
+            sectionTitle.TitleLabel.Text = newText; // Directly update the Label when Text changes
         }
     }
 }
