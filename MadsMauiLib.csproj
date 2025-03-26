@@ -20,12 +20,13 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.20</AssemblyVersion>
-		<FileVersion>1.0.20</FileVersion>
-		<Version>1.0.20</Version>
+		<AssemblyVersion>1.0.23</AssemblyVersion>
+		<FileVersion>1.0.23</FileVersion>
+		<Version>1.0.23</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
+		<Description>A collection of simple, time saving controls.</Description>
 	</PropertyGroup>	
 	<ItemGroup>
 	  <None Remove="Directory.Build.props" />
