@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:popups="clr-namespace:Mads195.MadsMauiLib.Controls"
+             x:Name="this"
+               Color="Transparent"
+             x:Class="Mads195.MadsMauiLib.Controls.FlexiDialog">
+        
+    <toolkit:Popup.Resources>
+        <Style TargetType="{x:Type popups:FlexiDialog}">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="CanBeDismissedByTappingOutsideOfPopup" Value="True" />
+        </Style>
+        <ResourceDictionary>
+            <toolkit:IsEqualConverter x:Key="IsEqualConverter" />
+        </ResourceDictionary>
+    </toolkit:Popup.Resources>
+
+    <Border HorizontalOptions="Center" Stroke="Black" StrokeThickness="1" BackgroundColor="White" x:Name="PopupBorder" Padding="20" WidthRequest="300">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="15" />
+        </Border.StrokeShape>
+        <VerticalStackLayout Spacing="10">
+            <Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            <Label Text="{Binding Message}" FontAttributes="Bold" IsVisible="False" />
+
+            <Grid IsVisible="{Binding DialogType, Converter={StaticResource IsEqualConverter}, ConverterParameter=FlexiDialogType.SingleField}">
+                <Label Text="Text" />
+                <Border Stroke="Gray" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 25" StrokeThickness="1" HeightRequest="50">
+                    <Entry Text="{Binding Input}" Keyboard="{Binding Keyboard}" />
+                </Border>
+            </Grid>
+
+            <Grid IsVisible="{Binding DialogType, Converter={StaticResource IsEqualConverter}, ConverterParameter=FlexiDialogType.ConfirmFieldPassword}">
+                <Label Text="Password" />
+                <Border Stroke="Gray" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 25" StrokeThickness="1" HeightRequest="50">
+                    <Entry Text="{Binding Password}" IsPassword="True" Keyboard="{Binding Keyboard}" />
+                </Border>
+
+                <Label Text="Confirm Password" />
+                <Border Stroke="Gray" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 25" StrokeThickness="1" HeightRequest="50">
+                    <Entry Text="{Binding ConfirmPassword}" IsPassword="True" Keyboard="{Binding Keyboard}" />
+                </Border>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnSpacing>10</Grid.ColumnSpacing>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" StrokeShape="RoundRectangle 25" StrokeThickness="1" Style="{StaticResource Mads195_MadsMauiLib_CancelButtonStyle}">
+                    <Button Text="{Binding ButtonCancelText}" Command="{Binding CancelCommand}" />
+                </Border>
+
+                <Border Grid.Column="1" StrokeShape="RoundRectangle 25" StrokeThickness="1" Style="{StaticResource Mads195_MadsMauiLib_SubmitButtonStyle}">
+                    <Button Text="{Binding ButtonSubmitText}" Command="{Binding SubmitCommand}" />
+                </Border>
+            </Grid>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

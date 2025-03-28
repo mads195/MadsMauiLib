@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">	
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android;net9.0-android;net8.0-ios;net9.0-ios;net8.0-maccatalyst;net9.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0;net9.0-windows10.0.19041.0</TargetFrameworks>
 		<!--<TargetFrameworks>$(NetVersion)-android;$(NetVersion)-ios;$(NetVersion)-maccatalyst</TargetFrameworks>-->
 		<!--<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>-->
 		<!--<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>-->
@@ -20,11 +20,13 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.18</AssemblyVersion>
-		<FileVersion>1.0.18</FileVersion>
-		<Version>1.0.18</Version>
+		<AssemblyVersion>1.0.46</AssemblyVersion>
+		<FileVersion>1.0.46</FileVersion>
+		<Version>1.0.46</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
+		<Authors>Mads195</Authors>
+		<Description>A collection of simple, time saving controls.</Description>
 	</PropertyGroup>	
 	<ItemGroup>
 	  <None Remove="Directory.Build.props" />
@@ -34,15 +36,27 @@
 	<ItemGroup>
 		<!--<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />-->
 		<!--<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />-->
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<!--<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />-->
+		<PackageReference Include="Microsoft.Maui.Controls" Version="*" Condition="'$(TargetFramework)' == 'net9.0-android' Or '$(TargetFramework)' == 'net9.0-ios' Or '$(TargetFramework)' == 'net9.0-maccatalyst' Or '$(TargetFramework)' == 'net9.0-windows10.0.19041.0'" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.*" Condition="'$(TargetFramework)' == 'net8.0-android' Or '$(TargetFramework)' == 'net8.0-ios' Or '$(TargetFramework)' == 'net8.0-maccatalyst' Or '$(TargetFramework)' == 'net8.0-windows10.0.19041.0'" />
+		
+		<PackageReference Include="Microsoft.Mvvm" Version="8.*" Condition="'$(TargetFramework)' == 'net9.0-android' Or '$(TargetFramework)' == 'net9.0-ios' Or '$(TargetFramework)' == 'net9.0-maccatalyst' Or '$(TargetFramework)' == 'net9.0-windows10.0.19041.0'" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.4.*" Condition="'$(TargetFramework)' == 'net8.0-android' Or '$(TargetFramework)' == 'net8.0-ios' Or '$(TargetFramework)' == 'net8.0-maccatalyst' Or '$(TargetFramework)' == 'net8.0-windows10.0.19041.0'" />
+		
+		<PackageReference Include="CommunityToolkit.Maui" Version="*" Condition="'$(TargetFramework)' == 'net9.0-android' Or '$(TargetFramework)' == 'net9.0-ios' Or '$(TargetFramework)' == 'net9.0-maccatalyst' Or '$(TargetFramework)' == 'net9.0-windows10.0.19041.0'" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.*" Condition="'$(TargetFramework)' == 'net8.0-android' Or '$(TargetFramework)' == 'net8.0-ios' Or '$(TargetFramework)' == 'net8.0-maccatalyst' Or '$(TargetFramework)' == 'net8.0-windows10.0.19041.0'" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Views\" />
+	  <Folder Include="Controls\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\FlexiDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\SectionTitle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
