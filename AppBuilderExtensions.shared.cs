@@ -17,7 +17,6 @@ namespace Mads195.MadsMauiLib
             builder.ConfigureMauiHandlers(static h =>
             {
                 h.AddHandler(typeof(SectionTitle), typeof(ContentViewHandler));
-                //h.AddHandler(typeof(FlexiDialog), typeof(ContentViewHandler));
             });
             builder.ConfigureFonts(fonts =>
             {
@@ -25,10 +24,8 @@ namespace Mads195.MadsMauiLib
                 fonts.AddFont("FontAwesome6Free-Regular-400.otf", "FontAwesome6FreeRegular");
                 fonts.AddFont("FontAwesome6Brands-Regular-400.otf", "FontAwesome6BrandsRegular");
             });
-            //builder.Services.AddSingleton<SectionTitle>();
+            
             builder.Services.AddTransientPopup<FlexiDialog, FlexiDialogViewModel>();
-
-            // Ensure styles are loaded at startup
 
             return builder;
         }

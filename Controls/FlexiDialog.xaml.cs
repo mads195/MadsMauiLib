@@ -1,5 +1,6 @@
 namespace Mads195.MadsMauiLib.Controls;
 
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Views;
 using Mads195.MadsMauiLib.ViewModels.Controls;
 
@@ -10,14 +11,11 @@ public partial class FlexiDialog : Popup
 	{
 		InitializeComponent();
         BindingContext = oVmZ;
-        //SetPopupWidth();
+        
+        Opened += OnOpened;
     }
-    //private void SetPopupWidth()
-    //{
-    //    double screenWidth = Application.Current.MainPage.Width;
-    //    double margin = 20;
-    //    double popupWidth = screenWidth - (2 * margin);
-
-    //    PopupBorder.WidthRequest = popupWidth;
-    //}
+    async void OnOpened(object? sender, PopupOpenedEventArgs e)
+    {
+        await ((FlexiDialogViewModel)BindingContext).OnOpened();
+    }
 }

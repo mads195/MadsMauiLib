@@ -20,9 +20,9 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.56</AssemblyVersion>
-		<FileVersion>1.0.56</FileVersion>
-		<Version>1.0.56</Version>
+		<AssemblyVersion>1.0.81</AssemblyVersion>
+		<FileVersion>1.0.81</FileVersion>
+		<Version>1.0.81</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
@@ -52,15 +52,16 @@
 	  <Folder Include="Views\" />
 	  <Folder Include="Controls\" />
 	</ItemGroup>
+	
+	<ItemGroup>
+		<MauiResource Include="Resources\Styles\Styles.xaml" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Controls\FlexiDialog.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\SectionTitle.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Resources\Styles\Styles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
