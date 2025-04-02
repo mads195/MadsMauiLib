@@ -13,6 +13,10 @@
             <Setter Property="VerticalOptions" Value="Start" />
             <Setter Property="CanBeDismissedByTappingOutsideOfPopup" Value="True" />
         </Style>
+
+        <ResourceDictionary>
+            <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+        </ResourceDictionary>
     </toolkit:Popup.Resources>
 
     <Border HorizontalOptions="Center" Stroke="Black" StrokeThickness="1" BackgroundColor="White" x:Name="PopupBorder" Padding="20" WidthRequest="300">
@@ -20,10 +24,16 @@
             <RoundRectangle CornerRadius="15" />
         </Border.StrokeShape>
         <VerticalStackLayout Spacing="10">
-            <Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-            <Label Text="{Binding Message}" FontAttributes="Bold" IsVisible="{Binding IsMessageVisible}" />
+            <Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" x:Name="MyTitle" />
+            <Label Text="{Binding Message}" FontAttributes="Bold" IsVisible="{Binding Message, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
+            <Label Text="{Binding HeroMessage}" FontSize="{Binding HeroFontSize}" Padding="0,10" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontAttributes="Bold" IsVisible="{Binding HeroMessage, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
+            <Label Text="{Binding ShareText}" FontAttributes="Bold" HorizontalOptions="Center" IsVisible="{Binding Message, Converter={StaticResource IsStringNotNullOrEmptyConverter}}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShareCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
 
-            <Grid IsVisible="{Binding IsSingleField}">
+                    <Grid IsVisible="{Binding IsSingleField}">
                 <VerticalStackLayout Spacing="10">
                     <Label Text="Text" />
                     <Border Stroke="Gray" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 25" StrokeThickness="1" HeightRequest="50">
@@ -60,6 +70,25 @@
                 </VerticalStackLayout>
             </Grid>
 
+            <Grid IsVisible="{Binding IsInfoList}">
+                <ScrollView>
+                    <CollectionView ItemsSource="{Binding InfoItems}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Key}" FontAttributes="Bold" Grid.Column="0"/>
+                                    <Label Text="{Binding Value}" Grid.Column="1" HorizontalTextAlignment="End" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </Grid>
+
             <Grid>
                 <Grid.ColumnSpacing>10</Grid.ColumnSpacing>
                 <Grid.ColumnDefinitions>
@@ -67,11 +96,11 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" StrokeShape="RoundRectangle 25" StrokeThickness="1">
+                <Border Grid.Column="0" StrokeShape="RoundRectangle 25" StrokeThickness="1" IsVisible="{Binding ButtonCancelText, Converter={StaticResource IsStringNotNullOrEmptyConverter}}">
                     <Button Text="{Binding ButtonCancelText}" Command="{Binding CancelCommand}" />
                 </Border>
 
-                <Border Grid.Column="1" StrokeShape="RoundRectangle 25" StrokeThickness="1">
+                <Border Grid.Column="1" StrokeShape="RoundRectangle 25" StrokeThickness="1" IsVisible="{Binding ButtonSubmitText, Converter={StaticResource IsStringNotNullOrEmptyConverter}}">
                     <Button Text="{Binding ButtonSubmitText}" Command="{Binding SubmitCommand}" />
                 </Border>
             </Grid>

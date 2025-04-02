@@ -20,13 +20,16 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.81</AssemblyVersion>
-		<FileVersion>1.0.81</FileVersion>
-		<Version>1.0.81</Version>
+		<AssemblyVersion>1.0.85</AssemblyVersion>
+		<FileVersion>1.0.85</FileVersion>
+		<Version>1.0.85</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
 		<Description>A collection of simple, time saving controls.</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/mads195/MadsMauiLib</PackageProjectUrl>
 	</PropertyGroup>	
 	<ItemGroup>
 	  <None Remove="Directory.Build.props" />
@@ -51,6 +54,8 @@
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Views\" />
 	  <Folder Include="Controls\" />
+	  <None Include="README.md" Pack="true" PackagePath="\" />
+	  <None Include="LICENSE.TXT" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	
 	<ItemGroup>

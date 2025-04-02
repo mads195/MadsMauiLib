@@ -2,7 +2,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Mads195.MadsMauiLib.ViewModels.Controls
 {
@@ -14,9 +16,9 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         [ObservableProperty]
         string title = "";
         [ObservableProperty]
-        string buttonCancelText = "";
+        string buttonCancelText = "Cancel";
         [ObservableProperty]
-        string buttonSubmitText = "";
+        string buttonSubmitText = "OK";
         [ObservableProperty]
         Keyboard keyboard = Keyboard.Default;
         [ObservableProperty]
@@ -31,13 +33,17 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         string validationRegexMessage = "";
         [ObservableProperty]
         string minLengthMessage = "";
+        [ObservableProperty]
+        string heroMessage = "";
+        [ObservableProperty]
+        double heroFontSize = 14;
+        [ObservableProperty]
+        string message = "";
+        [ObservableProperty]
+        string shareText = "";
         /**
          * Bindable Properties - Private
          */
-        [ObservableProperty]
-        private string message = "";
-        [ObservableProperty]
-        private bool isMessageVisible = false;
         [ObservableProperty]
         private string password = "";
         [ObservableProperty]
@@ -49,6 +55,8 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         [ObservableProperty]
         private bool isConfirmFieldPassword = false;
         [ObservableProperty]
+        private bool isInfoList = false;
+        [ObservableProperty]
         private string textField;
         [ObservableProperty]
         private string textConfirmValue;
@@ -58,7 +66,8 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         private string passwordValue;
         [ObservableProperty]
         private string passwordValueRepeat;
-
+        [ObservableProperty]
+        private ObservableCollection<KeyValuePair<string, string>> infoItems = new();
         readonly IPopupService popupService;
         public FlexiDialogViewModel(IPopupService popupService)
         {
@@ -96,7 +105,6 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                     if (TextConfirmValue != TextConfirmValueRepeat)
                     {
                         Message = "Your entries do not match";
-                        IsMessageVisible = true;
                         return;
                     }
 
@@ -112,22 +120,29 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                     if (PasswordValue != PasswordValue)
                     {
                         Message = "Your entries do not match";
-                        IsMessageVisible = true;
                         return;
                     }
 
                     vEntryValue = PasswordValue;
                     break;
             }
+            [RelayCommand]
+            async void OnShare()
+            {
+                await Share.Default.RequestAsync(new ShareTextRequest
+                {
+                    Text = ShareText,
+                    Title = Title
+                });
+            }
 
             /**
              * Validation
              */
             // Check over min length
-            if(vEntryValue.Length < MinLength)
+            if (vEntryValue.Length < MinLength)
             {
                 Message = (!string.IsNullOrEmpty(MinLengthMessage) ? MinLengthMessage : $"Entry must be at least {MinLength} characters");
-                IsMessageVisible = true;
                 return;
             }
 
@@ -135,7 +150,6 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
             if(!string.IsNullOrEmpty(ValidationRegex) && !Regex.IsMatch(vEntryValue, ValidationRegex))
             {
                 Message = (!string.IsNullOrEmpty(ValidationRegexMessage) ? ValidationRegexMessage : "The entry does not match the required format");
-                IsMessageVisible = true;
                 return;
             }
 
@@ -146,8 +160,8 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         public async Task OnOpened()
         {
             Console.WriteLine("FlexiDialogViewModel.OnOpened");
-            IsMessageVisible = false;
-            Message = "";
+            //IsMessageVisible = false;
+            //Message = "";
             switch (DialogType)
             {
                 case FlexiDialogType.SingleField:
@@ -162,6 +176,14 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - ConfirmFieldPassword");
                     IsConfirmFieldPassword = true;
                     break;
+                case FlexiDialogType.InfoList:
+                    Console.WriteLine("FlexiDialogViewModel.OnOpened - InfoList");
+                    if (InfoItems != null)
+                    {
+                        InfoItems = new ObservableCollection<KeyValuePair<string, string>>(InfoItems);
+                    }
+                    IsInfoList = true;
+                    break;
             }
         }
     }
@@ -170,6 +192,7 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
     {
         SingleField,
         ConfirmFieldPassword,
-        ConfirmField
+        ConfirmField,
+        InfoList
     }
 }
