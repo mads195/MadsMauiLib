@@ -41,123 +41,150 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         string message = "";
         [ObservableProperty]
         string shareText = "";
+        [ObservableProperty]
+        string shareLabel = "";
+        [ObservableProperty]
+        bool cancelShouldReturn = false;
+        [ObservableProperty]
+        string checkBoxLabel = "";
+        [ObservableProperty]
+        private ObservableCollection<KeyValuePair<string, string>> infoItems = new();
         /**
          * Bindable Properties - Private
          */
-        [ObservableProperty]
-        private string password = "";
-        [ObservableProperty]
-        private string confirmPassword = "";
-        [ObservableProperty]
-        private bool isSingleField = false;
-        [ObservableProperty]
-        private bool isConfirmField = false;
-        [ObservableProperty]
-        private bool isConfirmFieldPassword = false;
-        [ObservableProperty]
-        private bool isInfoList = false;
-        [ObservableProperty]
-        private string textField;
-        [ObservableProperty]
-        private string textConfirmValue;
-        [ObservableProperty]
-        private string textConfirmValueRepeat;
-        [ObservableProperty]
-        private string passwordValue;
-        [ObservableProperty]
-        private string passwordValueRepeat;
-        [ObservableProperty]
-        private ObservableCollection<KeyValuePair<string, string>> infoItems = new();
-        readonly IPopupService popupService;
+        private string password { get; set; }
+        private string Password
+        {
+            get { return password; }
+            set { password = value; OnPropertyChanged("Password"); }
+        }
+        private string confirmPassword { get; set; }
+        private string ConfirmPassword
+        {
+            get { return confirmPassword; }
+            set { confirmPassword = value; OnPropertyChanged("ConfirmPassword"); }
+        }
+        private bool isSingleField { get; set; } = false;
+        private bool IsSingleField
+        {
+            get { return isSingleField; }
+            set { isSingleField = value; OnPropertyChanged("IsSingleField"); }
+        }
+        private bool isConfirmField { get; set; } = false;
+        private bool IsConfirmField
+        {
+            get { return isConfirmField; }
+            set { isConfirmField = value; OnPropertyChanged("IsConfirmField"); }
+        }
+        private bool isConfirmFieldPassword { get; set; } = false;
+        private bool IsConfirmFieldPassword
+        {
+            get { return isConfirmFieldPassword; }
+            set { isConfirmFieldPassword = value; OnPropertyChanged("IsConfirmFieldPassword"); }
+        }
+        private bool isCheckboxField { get; set; } = false;
+        private bool IsCheckboxField
+        {
+            get { return isCheckboxField; }
+            set { isCheckboxField = value; OnPropertyChanged("IsCheckboxField"); }
+        }
+        private bool isCheckboxFieldChecked { get; set; } = false;
+        private bool IsCheckboxFieldChecked
+        {
+            get { return isCheckboxFieldChecked; }
+            set { isCheckboxFieldChecked = value; OnPropertyChanged("IsCheckboxFieldChecked"); }
+        }
+        private bool isInfoList { get; set; } = false;
+        private bool IsInfoList
+        {
+            get { return isInfoList; }
+            set { isInfoList = value; OnPropertyChanged("IsInfoList"); }
+        }
+        private string textField { get; set; }
+        private string TextField
+        {
+            get { return textField; }
+            set { textField = value; OnPropertyChanged("TextField"); }
+        }
+        private string textConfirmValue { get; set; }
+        private string TextConfirmValue
+        {
+            get { return textConfirmValue; }
+            set { textConfirmValue = value; OnPropertyChanged("TextConfirmValue"); }
+        }
+        private string textConfirmValueRepeat { get; set; }
+        private string TextConfirmValueRepeat
+        {
+            get { return textConfirmValueRepeat; }
+            set { textConfirmValueRepeat = value; OnPropertyChanged("TextConfirmValueRepeat"); }
+        }
+        private string passwordValue { get; set; }
+        private string PasswordValue
+        {
+            get { return passwordValue; }
+            set { passwordValue = value; OnPropertyChanged("PasswordValue"); }
+        }
+        private string passwordValueRepeat { get; set; }
+        private string PasswordValueRepeat
+        {
+            get { return passwordValueRepeat; }
+            set { passwordValueRepeat = value; OnPropertyChanged("PasswordValueRepeat"); }
+        }
+        private string checkBoxValue { get; set; }
+        private string CheckBoxValue
+        {
+            get { return checkBoxValue; }
+            set { checkBoxValue = value; OnPropertyChanged("CheckBoxValue"); }
+        }
+        internal readonly IPopupService popupService;
         public FlexiDialogViewModel(IPopupService popupService)
         {
             this.popupService = popupService;
         }
         [RelayCommand(CanExecute = nameof(CanCancel))]
-        void OnCancel()
+        internal async void OnCancel()
         {
-            popupService.ClosePopup();
+            if (CancelShouldReturn)
+            {
+                try
+                {
+                    FlexiDialogResponse oFlexiDialogResponseZ = await PrepareReturnValue(FlexiDialogButton.Cancel);
+                    popupService.ClosePopup(oFlexiDialogResponseZ);
+                }
+                catch (Exception ex)
+                {
+                    // Exception - cancel the submit and show the message
+                    Message = ex.Message;
+                    return;
+                }
+            }
+            else
+            {
+                popupService.ClosePopup();
+            }
         }
-        bool CanCancel() => true;
+        internal bool CanCancel() => true;
 
         [RelayCommand(CanExecute = nameof(CanSubmit))]
-        void OnSubmit()
+        internal async void OnSubmit()
         {
             Console.WriteLine("FlexiDialogViewModel.OnSubmit");
-            string vEntryValue = "";
-            switch (DialogType)
+            
+            try
             {
-                case FlexiDialogType.SingleField:
-                    if (string.IsNullOrEmpty(TextField))
-                    {
-                        popupService.ClosePopup();
-                        return;
-                    }
-                    vEntryValue = TextField;
-                    break;
-                case FlexiDialogType.ConfirmField:
-                    if (string.IsNullOrEmpty(TextConfirmValue) && string.IsNullOrEmpty(TextConfirmValueRepeat))
-                    {
-                        popupService.ClosePopup();
-                        return;
-                    }
-
-                    if (TextConfirmValue != TextConfirmValueRepeat)
-                    {
-                        Message = "Your entries do not match";
-                        return;
-                    }
-
-                    vEntryValue = TextConfirmValue;
-                    break;
-                case FlexiDialogType.ConfirmFieldPassword:
-                    if (string.IsNullOrEmpty(PasswordValue) && string.IsNullOrEmpty(PasswordValue))
-                    {
-                        popupService.ClosePopup();
-                        return;
-                    }
-
-                    if (PasswordValue != PasswordValue)
-                    {
-                        Message = "Your entries do not match";
-                        return;
-                    }
-
-                    vEntryValue = PasswordValue;
-                    break;
+                FlexiDialogResponse oFlexiDialogResponseZ = await PrepareReturnValue(FlexiDialogButton.Submit);
+                popupService.ClosePopup(oFlexiDialogResponseZ);
             }
-            [RelayCommand]
-            async void OnShare()
+            catch(Exception ex)
             {
-                await Share.Default.RequestAsync(new ShareTextRequest
-                {
-                    Text = ShareText,
-                    Title = Title
-                });
-            }
-
-            /**
-             * Validation
-             */
-            // Check over min length
-            if (vEntryValue.Length < MinLength)
-            {
-                Message = (!string.IsNullOrEmpty(MinLengthMessage) ? MinLengthMessage : $"Entry must be at least {MinLength} characters");
+                // Exception - cancel the submit and show the message
+                Message = ex.Message;
                 return;
             }
-
-            // Regex
-            if(!string.IsNullOrEmpty(ValidationRegex) && !Regex.IsMatch(vEntryValue, ValidationRegex))
-            {
-                Message = (!string.IsNullOrEmpty(ValidationRegexMessage) ? ValidationRegexMessage : "The entry does not match the required format");
-                return;
-            }
-
-            popupService.ClosePopup(vEntryValue);
         }
-        bool CanSubmit() => true;
+        internal bool CanSubmit() => true;
 
-        public async Task OnOpened()
+        internal async Task OnOpened()
         {
             Console.WriteLine("FlexiDialogViewModel.OnOpened");
             //IsMessageVisible = false;
@@ -184,7 +211,101 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                     }
                     IsInfoList = true;
                     break;
+                case FlexiDialogType.SingleCheckbox:
+                    Console.WriteLine("FlexiDialogViewModel.OnOpened - SingleCheckbox");
+                    IsCheckboxField = true;
+                    break;
             }
+        }
+        [RelayCommand]
+        internal async void OnShare()
+        {
+            await Share.Default.RequestAsync(new ShareTextRequest
+            {
+                Text = ShareText,
+                Title = Title
+            });
+        }
+
+        internal async Task<FlexiDialogResponse> PrepareReturnValue(FlexiDialogButton oButtonZ)
+        {
+            string vEntryValue = "";
+            switch (DialogType)
+            {
+                case FlexiDialogType.SingleField:
+                    if (string.IsNullOrEmpty(TextField))
+                    {
+                        throw new Exception("A value is required");
+                        //popupService.ClosePopup();
+                        //return;
+                    }
+                    vEntryValue = TextField;
+                    break;
+                case FlexiDialogType.ConfirmField:
+                    if (string.IsNullOrEmpty(TextConfirmValue) && string.IsNullOrEmpty(TextConfirmValueRepeat))
+                    {
+                        throw new Exception("A value is required");
+                        //popupService.ClosePopup();
+                        //return;
+                    }
+
+                    if (TextConfirmValue != TextConfirmValueRepeat)
+                    {
+                        throw new Exception("Your entries do not match");
+                        //Message = "Your entries do not match";
+                        //return;
+                    }
+
+                    vEntryValue = TextConfirmValue;
+                    break;
+                case FlexiDialogType.ConfirmFieldPassword:
+                    if (string.IsNullOrEmpty(PasswordValue) && string.IsNullOrEmpty(PasswordValue))
+                    {
+                        throw new Exception("A value is required");
+                        //popupService.ClosePopup();
+                        //return;
+                    }
+
+                    if (PasswordValue != PasswordValue)
+                    {
+                        throw new Exception("Your entries do not match");
+                        //Message = "Your entries do not match";
+                        //return;
+                    }
+
+                    vEntryValue = PasswordValue;
+                    break;
+                case FlexiDialogType.SingleCheckbox:
+                    vEntryValue = IsCheckboxFieldChecked ? "true" : "false";
+                    break;
+            }
+
+            /**
+             * Validation
+             */
+            // Check over min length
+            if (vEntryValue.Length < MinLength)
+            {
+                throw new Exception(!string.IsNullOrEmpty(MinLengthMessage) ? MinLengthMessage : $"Entry must be at least {MinLength} characters");
+                //Message = (!string.IsNullOrEmpty(MinLengthMessage) ? MinLengthMessage : $"Entry must be at least {MinLength} characters");
+                //return;
+            }
+
+            // Regex
+            if (!string.IsNullOrEmpty(ValidationRegex) && !Regex.IsMatch(vEntryValue, ValidationRegex))
+            {
+                throw new Exception(!string.IsNullOrEmpty(ValidationRegexMessage) ? ValidationRegexMessage : "The entry does not match the required format");
+                //Message = (!string.IsNullOrEmpty(ValidationRegexMessage) ? ValidationRegexMessage : "The entry does not match the required format");
+                //return;
+            }
+
+            FlexiDialogResponse oFlexiDialogResponseZ = new FlexiDialogResponse()
+            {
+                ButtonClicked = oButtonZ,
+                Value = vEntryValue
+            };
+
+            return oFlexiDialogResponseZ;
         }
     }
 
@@ -193,6 +314,19 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         SingleField,
         ConfirmFieldPassword,
         ConfirmField,
-        InfoList
+        InfoList,
+        SingleCheckbox
+    }
+
+    public enum FlexiDialogButton
+    {
+        Cancel,
+        Submit
+    }
+
+    public class FlexiDialogResponse
+    {
+        public string? Value { get; set; }
+        public FlexiDialogButton ButtonClicked { get; set; }
     }
 }

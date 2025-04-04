@@ -27,7 +27,7 @@
             <Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" x:Name="MyTitle" />
             <Label Text="{Binding Message}" FontAttributes="Bold" IsVisible="{Binding Message, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
             <Label Text="{Binding HeroMessage}" FontSize="{Binding HeroFontSize}" Padding="0,10" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontAttributes="Bold" IsVisible="{Binding HeroMessage, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
-            <Label Text="{Binding ShareText}" FontAttributes="Bold" HorizontalOptions="Center" IsVisible="{Binding Message, Converter={StaticResource IsStringNotNullOrEmptyConverter}}">
+            <Label Text="{Binding ShareLabel}" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center" IsVisible="{Binding Message, Converter={StaticResource IsStringNotNullOrEmptyConverter}}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ShareCommand}" />
                 </Label.GestureRecognizers>
@@ -70,7 +70,20 @@
                 </VerticalStackLayout>
             </Grid>
 
-            <Grid IsVisible="{Binding IsInfoList}">
+            <Grid IsVisible="{Binding IsCheckboxField}">
+                <VerticalStackLayout Spacing="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding CheckBoxLabel}" FontAttributes="Bold" Grid.Column="0" />
+                        <CheckBox IsChecked="{Binding IsCheckboxFieldChecked}" Grid.Column="1" HorizontalOptions="End" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Grid>
+
+                <Grid IsVisible="{Binding IsInfoList}">
                 <ScrollView>
                     <CollectionView ItemsSource="{Binding InfoItems}">
                         <CollectionView.ItemTemplate>
