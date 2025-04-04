@@ -48,98 +48,139 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         [ObservableProperty]
         string checkBoxLabel = "";
         [ObservableProperty]
-        private ObservableCollection<KeyValuePair<string, string>> infoItems = new();
+        ObservableCollection<KeyValuePair<string, string>> infoItems = new();
         /**
          * Bindable Properties - Private
          */
+        //[ObservableProperty]
+        //internal string password;
+        //[ObservableProperty]
+        //internal string confirmPassword;
+        //[ObservableProperty]
+        //internal bool isSingleField;
+        //[ObservableProperty]
+        //internal bool isConfirmField;
+        ////[ObservableProperty]
+        ////internal bool isConfirmFieldPassword;
+        //[ObservableProperty]
+        //internal bool isCheckboxField;
+        //[ObservableProperty]
+        //internal bool isCheckboxFieldChecked;
+        //[ObservableProperty]
+        //internal bool isInfoList;
+        //[ObservableProperty]
+        //internal string textField;
+        //[ObservableProperty]
+        //internal string textConfirmValue;
+        //[ObservableProperty]
+        //internal string textConfirmValueRepeat;
+        //[ObservableProperty]
+        //internal string passwordValue;
+        //[ObservableProperty]
+        //internal string passwordValueRepeat;
+
+        //private bool isConfirmFieldPassword { get; set; } = false;
+        //public bool IsConfirmFieldPassword
+        //{
+        //    get { return isConfirmFieldPassword; }
+        //    internal set { isConfirmFieldPassword = value; OnPropertyChanged(nameof(IsConfirmFieldPassword)); }
+        //}
+
+        //[ObservableProperty]
         private string password { get; set; }
-        private string Password
+        public string Password
         {
             get { return password; }
-            set { password = value; OnPropertyChanged("Password"); }
+            internal set { password = value; OnPropertyChanged(nameof(Password)); }
         }
         private string confirmPassword { get; set; }
-        private string ConfirmPassword
+        public string ConfirmPassword
         {
             get { return confirmPassword; }
-            set { confirmPassword = value; OnPropertyChanged("ConfirmPassword"); }
+            internal set { confirmPassword = value; OnPropertyChanged(nameof(ConfirmPassword)); }
         }
         private bool isSingleField { get; set; } = false;
-        private bool IsSingleField
+        public bool IsSingleField
         {
             get { return isSingleField; }
-            set { isSingleField = value; OnPropertyChanged("IsSingleField"); }
+            internal set { isSingleField = value; OnPropertyChanged(nameof(IsSingleField)); }
         }
         private bool isConfirmField { get; set; } = false;
-        private bool IsConfirmField
+        public bool IsConfirmField
         {
             get { return isConfirmField; }
-            set { isConfirmField = value; OnPropertyChanged("IsConfirmField"); }
+            internal set { isConfirmField = value; OnPropertyChanged(nameof(IsConfirmField)); }
         }
         private bool isConfirmFieldPassword { get; set; } = false;
-        private bool IsConfirmFieldPassword
+        public bool IsConfirmFieldPassword
         {
             get { return isConfirmFieldPassword; }
-            set { isConfirmFieldPassword = value; OnPropertyChanged("IsConfirmFieldPassword"); }
+            internal set { isConfirmFieldPassword = value; OnPropertyChanged(nameof(IsConfirmFieldPassword)); }
         }
         private bool isCheckboxField { get; set; } = false;
-        private bool IsCheckboxField
+        public bool IsCheckboxField
         {
             get { return isCheckboxField; }
-            set { isCheckboxField = value; OnPropertyChanged("IsCheckboxField"); }
+            internal set { isCheckboxField = value; OnPropertyChanged(nameof(IsCheckboxField)); }
         }
         private bool isCheckboxFieldChecked { get; set; } = false;
-        private bool IsCheckboxFieldChecked
+        public bool IsCheckboxFieldChecked
         {
             get { return isCheckboxFieldChecked; }
-            set { isCheckboxFieldChecked = value; OnPropertyChanged("IsCheckboxFieldChecked"); }
+            internal set { isCheckboxFieldChecked = value; OnPropertyChanged(nameof(IsCheckboxFieldChecked)); }
         }
-        private bool isInfoList { get; set; } = false;
-        private bool IsInfoList
+        private bool _isInfoList { get; set; } = false;
+        public bool IsInfoList
         {
-            get { return isInfoList; }
-            set { isInfoList = value; OnPropertyChanged("IsInfoList"); }
+            get { return _isInfoList; }
+            internal set { _isInfoList = value; OnPropertyChanged(nameof(IsInfoList)); }
         }
         private string textField { get; set; }
-        private string TextField
+        public string TextField
         {
             get { return textField; }
-            set { textField = value; OnPropertyChanged("TextField"); }
+            internal set { textField = value; OnPropertyChanged(nameof(TextField)); }
         }
         private string textConfirmValue { get; set; }
-        private string TextConfirmValue
+        public string TextConfirmValue
         {
             get { return textConfirmValue; }
-            set { textConfirmValue = value; OnPropertyChanged("TextConfirmValue"); }
+            internal set { textConfirmValue = value; OnPropertyChanged(nameof(TextConfirmValue)); }
         }
         private string textConfirmValueRepeat { get; set; }
-        private string TextConfirmValueRepeat
+        public string TextConfirmValueRepeat
         {
             get { return textConfirmValueRepeat; }
-            set { textConfirmValueRepeat = value; OnPropertyChanged("TextConfirmValueRepeat"); }
+            internal set { textConfirmValueRepeat = value; OnPropertyChanged(nameof(TextConfirmValueRepeat)); }
         }
         private string passwordValue { get; set; }
-        private string PasswordValue
+        public string PasswordValue
         {
             get { return passwordValue; }
-            set { passwordValue = value; OnPropertyChanged("PasswordValue"); }
+            internal set { passwordValue = value; OnPropertyChanged((PasswordValue)); }
         }
         private string passwordValueRepeat { get; set; }
-        private string PasswordValueRepeat
+        public string PasswordValueRepeat
         {
             get { return passwordValueRepeat; }
-            set { passwordValueRepeat = value; OnPropertyChanged("PasswordValueRepeat"); }
+            internal set { passwordValueRepeat = value; OnPropertyChanged(nameof(PasswordValueRepeat)); }
         }
         private string checkBoxValue { get; set; }
-        private string CheckBoxValue
+        public string CheckBoxValue
         {
             get { return checkBoxValue; }
-            set { checkBoxValue = value; OnPropertyChanged("CheckBoxValue"); }
+            internal set { checkBoxValue = value; OnPropertyChanged(nameof(CheckBoxValue)); }
         }
         internal readonly IPopupService popupService;
         public FlexiDialogViewModel(IPopupService popupService)
         {
             this.popupService = popupService;
+            IsCheckboxField = false;
+            isCheckboxFieldChecked = false;
+            IsConfirmField = false;
+            IsConfirmFieldPassword = false;
+            IsSingleField = false;
+            IsInfoList = false;
         }
         [RelayCommand(CanExecute = nameof(CanCancel))]
         internal async void OnCancel()
