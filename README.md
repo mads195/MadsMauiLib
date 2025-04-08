@@ -1,9 +1,14 @@
 # Mads195.MadsMauiLib
 MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of classes and functions that are useful for developing applications with the Maui Framework.
 ## New Features (April 2025)
+**FlexiDialog**
 - FlexiDialog has been extended to include two new dialog types: InfoList, a list of key/values and SingleCheckbox, a single checkbox with a label.
 - Simple share option for having a link that allows you to share a text value via the built-in share sheet
 - Hero message - simple prominent message
+
+**LabelItem**
+- Displays a left label and right aligned value - both are bindable.
+- LabelItem has been extended to include a bindable command that can be used to execute a command when the label is tapped.
 ## Controls
 ### FlexiDialog
 Built on **.NET MAUI CommunityToolKit Popup**, FlexiDialog is a pre-built dialog that can be used to show a message, ask for a confirmation, or ask for a password. There are 3 types of dialogs:
