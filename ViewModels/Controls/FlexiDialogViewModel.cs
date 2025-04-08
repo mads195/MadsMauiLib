@@ -52,135 +52,35 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         /**
          * Bindable Properties - Private
          */
-        //[ObservableProperty]
-        //internal string password;
-        //[ObservableProperty]
-        //internal string confirmPassword;
-        //[ObservableProperty]
-        //internal bool isSingleField;
-        //[ObservableProperty]
-        //internal bool isConfirmField;
-        ////[ObservableProperty]
-        ////internal bool isConfirmFieldPassword;
-        //[ObservableProperty]
-        //internal bool isCheckboxField;
-        //[ObservableProperty]
-        //internal bool isCheckboxFieldChecked;
-        //[ObservableProperty]
-        //internal bool isInfoList;
-        //[ObservableProperty]
-        //internal string textField;
-        //[ObservableProperty]
-        //internal string textConfirmValue;
-        //[ObservableProperty]
-        //internal string textConfirmValueRepeat;
-        //[ObservableProperty]
-        //internal string passwordValue;
-        //[ObservableProperty]
-        //internal string passwordValueRepeat;
+        [ObservableProperty]
+        string password;
+        [ObservableProperty]
+        string confirmPassword;
+        [ObservableProperty]
+        bool isCheckboxFieldChecked;
+        [ObservableProperty]
+        string textField;
+        [ObservableProperty]
+        string textConfirmValue;
+        [ObservableProperty]
+        string textConfirmValueRepeat;
+        [ObservableProperty]
+        string passwordValue;
+        [ObservableProperty]
+        string passwordValueRepeat;
+        [ObservableProperty]
+        string checkBoxValue;
 
-        //private bool isConfirmFieldPassword { get; set; } = false;
-        //public bool IsConfirmFieldPassword
-        //{
-        //    get { return isConfirmFieldPassword; }
-        //    internal set { isConfirmFieldPassword = value; OnPropertyChanged(nameof(IsConfirmFieldPassword)); }
-        //}
-
-        //[ObservableProperty]
-        private string password { get; set; }
-        public string Password
-        {
-            get { return password; }
-            internal set { password = value; OnPropertyChanged(nameof(Password)); }
-        }
-        private string confirmPassword { get; set; }
-        public string ConfirmPassword
-        {
-            get { return confirmPassword; }
-            internal set { confirmPassword = value; OnPropertyChanged(nameof(ConfirmPassword)); }
-        }
-        private bool isSingleField { get; set; } = false;
-        public bool IsSingleField
-        {
-            get { return isSingleField; }
-            internal set { isSingleField = value; OnPropertyChanged(nameof(IsSingleField)); }
-        }
-        private bool isConfirmField { get; set; } = false;
-        public bool IsConfirmField
-        {
-            get { return isConfirmField; }
-            internal set { isConfirmField = value; OnPropertyChanged(nameof(IsConfirmField)); }
-        }
-        private bool isConfirmFieldPassword { get; set; } = false;
-        public bool IsConfirmFieldPassword
-        {
-            get { return isConfirmFieldPassword; }
-            internal set { isConfirmFieldPassword = value; OnPropertyChanged(nameof(IsConfirmFieldPassword)); }
-        }
-        private bool isCheckboxField { get; set; } = false;
-        public bool IsCheckboxField
-        {
-            get { return isCheckboxField; }
-            internal set { isCheckboxField = value; OnPropertyChanged(nameof(IsCheckboxField)); }
-        }
-        private bool isCheckboxFieldChecked { get; set; } = false;
-        public bool IsCheckboxFieldChecked
-        {
-            get { return isCheckboxFieldChecked; }
-            internal set { isCheckboxFieldChecked = value; OnPropertyChanged(nameof(IsCheckboxFieldChecked)); }
-        }
-        private bool _isInfoList { get; set; } = false;
-        public bool IsInfoList
-        {
-            get { return _isInfoList; }
-            internal set { _isInfoList = value; OnPropertyChanged(nameof(IsInfoList)); }
-        }
-        private string textField { get; set; }
-        public string TextField
-        {
-            get { return textField; }
-            internal set { textField = value; OnPropertyChanged(nameof(TextField)); }
-        }
-        private string textConfirmValue { get; set; }
-        public string TextConfirmValue
-        {
-            get { return textConfirmValue; }
-            internal set { textConfirmValue = value; OnPropertyChanged(nameof(TextConfirmValue)); }
-        }
-        private string textConfirmValueRepeat { get; set; }
-        public string TextConfirmValueRepeat
-        {
-            get { return textConfirmValueRepeat; }
-            internal set { textConfirmValueRepeat = value; OnPropertyChanged(nameof(TextConfirmValueRepeat)); }
-        }
-        private string passwordValue { get; set; }
-        public string PasswordValue
-        {
-            get { return passwordValue; }
-            internal set { passwordValue = value; OnPropertyChanged((PasswordValue)); }
-        }
-        private string passwordValueRepeat { get; set; }
-        public string PasswordValueRepeat
-        {
-            get { return passwordValueRepeat; }
-            internal set { passwordValueRepeat = value; OnPropertyChanged(nameof(PasswordValueRepeat)); }
-        }
-        private string checkBoxValue { get; set; }
-        public string CheckBoxValue
-        {
-            get { return checkBoxValue; }
-            internal set { checkBoxValue = value; OnPropertyChanged(nameof(CheckBoxValue)); }
-        }
         internal readonly IPopupService popupService;
         public FlexiDialogViewModel(IPopupService popupService)
         {
             this.popupService = popupService;
-            IsCheckboxField = false;
+            //IsCheckboxField = false;
             isCheckboxFieldChecked = false;
-            IsConfirmField = false;
-            IsConfirmFieldPassword = false;
-            IsSingleField = false;
-            IsInfoList = false;
+            //IsConfirmField = false;
+            //IsConfirmFieldPassword = false;
+            //IsSingleField = false;
+            //IsInfoList = false;
         }
         [RelayCommand(CanExecute = nameof(CanCancel))]
         internal async void OnCancel()
@@ -234,15 +134,15 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
             {
                 case FlexiDialogType.SingleField:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - SingleField");
-                    IsSingleField = true;
+                    //IsSingleField = true;
                     break;
                 case FlexiDialogType.ConfirmField:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - ConfirmField");
-                    IsConfirmField = true;
+                    //IsConfirmField = true;
                     break;
                 case FlexiDialogType.ConfirmFieldPassword:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - ConfirmFieldPassword");
-                    IsConfirmFieldPassword = true;
+                    //IsConfirmFieldPassword = true;
                     break;
                 case FlexiDialogType.InfoList:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - InfoList");
@@ -250,11 +150,11 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                     {
                         InfoItems = new ObservableCollection<KeyValuePair<string, string>>(InfoItems);
                     }
-                    IsInfoList = true;
+                    //IsInfoList = true;
                     break;
                 case FlexiDialogType.SingleCheckbox:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - SingleCheckbox");
-                    IsCheckboxField = true;
+                    //IsCheckboxField = true;
                     break;
             }
         }
@@ -300,14 +200,14 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                     vEntryValue = TextConfirmValue;
                     break;
                 case FlexiDialogType.ConfirmFieldPassword:
-                    if (string.IsNullOrEmpty(PasswordValue) && string.IsNullOrEmpty(PasswordValue))
+                    if (string.IsNullOrEmpty(PasswordValue) || string.IsNullOrEmpty(PasswordValueRepeat))
                     {
                         throw new Exception("A value is required");
                         //popupService.ClosePopup();
                         //return;
                     }
 
-                    if (PasswordValue != PasswordValue)
+                    if (PasswordValue != PasswordValueRepeat)
                     {
                         throw new Exception("Your entries do not match");
                         //Message = "Your entries do not match";

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui;
 using Mads195.MadsMauiLib.Controls;
+using Mads195.MadsMauiLib.Database.SQLite;
 using Mads195.MadsMauiLib.ViewModels.Controls;
 using Microsoft.Maui.Handlers;
 
@@ -24,7 +25,9 @@ namespace Mads195.MadsMauiLib
                 fonts.AddFont("FontAwesome6Free-Regular-400.otf", "FontAwesome6FreeRegular");
                 fonts.AddFont("FontAwesome6Brands-Regular-400.otf", "FontAwesome6BrandsRegular");
             });
-            
+
+            builder.Services.AddSingleton<ISQLiteDb>(new SQLiteDb("AppData"));
+
             builder.Services.AddTransientPopup<FlexiDialog, FlexiDialogViewModel>();
 
             return builder;

@@ -20,9 +20,9 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.96</AssemblyVersion>
-		<FileVersion>1.0.96</FileVersion>
-		<Version>1.0.96</Version>
+		<AssemblyVersion>1.0.130</AssemblyVersion>
+		<FileVersion>1.0.130</FileVersion>
+		<Version>1.0.130</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
@@ -48,12 +48,12 @@
 		
 		<PackageReference Include="CommunityToolkit.Maui" Version="*" Condition="'$(TargetFramework)' == 'net9.0-android' Or '$(TargetFramework)' == 'net9.0-ios' Or '$(TargetFramework)' == 'net9.0-maccatalyst' Or '$(TargetFramework)' == 'net9.0-windows10.0.19041.0'" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.*" Condition="'$(TargetFramework)' == 'net8.0-android' Or '$(TargetFramework)' == 'net8.0-ios' Or '$(TargetFramework)' == 'net8.0-maccatalyst' Or '$(TargetFramework)' == 'net8.0-windows10.0.19041.0'" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Views\" />
-	  <Folder Include="Controls\" />
 	  <None Include="README.md" Pack="true" PackagePath="\" />
 	  <None Include="LICENSE.TXT" Pack="true" PackagePath="\" />
 	</ItemGroup>
@@ -63,6 +63,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\Card.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\FlexiDialog.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

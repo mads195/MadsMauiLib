@@ -50,6 +50,7 @@ var oValueZ = await this.popupService.ShowPopupAsync<Mads195.MadsMauiLib.ViewMod
     viewModel.InfoItems = aExtraData;
 });
 ```
+**Note:** Several internally used properties are exposed to allow for customization of the dialog. These properties are not intended to be used by the developer and are typically used for comparison and validation purposes within the control. The properties are: `password`, `confirmPassowrd`, `isCheckboxFieldChecked`, `textField`, `textConfirmValue`, `textConfirmValueRepeat`, `passwordValue`, `passwordValueRepeat` and `checkBoxValue`. These values should not be considered as permanent and may change in future releases.
 
 ### SectionTitle
 Section title simply displays a consistently formatted title to use within a view.
@@ -63,4 +64,18 @@ Section title simply displays a consistently formatted title to use within a vie
 
 ```
 <madsmauilib:SectionTitle Text="Hello Mads195!" Padding="20,0,20,0" TextColor="Red" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" />
+```
+
+### LabelItem
+Displays a label and a value. The label is on the left and the value is on the right. The label can be a string or a bindable property. A bindable command can be used to execute a command when the label is tapped.
+
+#### Usage
+```
+<ContentPage ...
+             xmlns:madsmauilib="clr-namespace:Mads195.MadsMauiLib.Controls;assembly=MadsMauiLib"
+             ...>
+```
+
+```
+<madsmauilib:LabelItem TextStart="Check Database" TextEnd="{Binding DatabaseCheck}" TapCommand="{Binding CheckDatabaseCommand}" Padding="0,10" />
 ```

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:popups="clr-namespace:Mads195.MadsMauiLib.Controls"
+             xmlns:vm="clr-namespace:Mads195.MadsMauiLib.ViewModels.Controls"
              x:Name="this"
                Color="Transparent"
              x:Class="Mads195.MadsMauiLib.Controls.FlexiDialog">
@@ -13,9 +14,10 @@
             <Setter Property="VerticalOptions" Value="Start" />
             <Setter Property="CanBeDismissedByTappingOutsideOfPopup" Value="True" />
         </Style>
-
+        
         <ResourceDictionary>
             <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+            <toolkit:EnumToBoolConverter x:Key="PlatformConverter" />
         </ResourceDictionary>
     </toolkit:Popup.Resources>
 
@@ -33,44 +35,45 @@
                 </Label.GestureRecognizers>
             </Label>
 
-                    <Grid IsVisible="{Binding IsSingleField}">
+            <!-- Single Field -->
+            <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.SingleField}}">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Text" />
                     <Border Stroke="Gray" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 25" StrokeThickness="1" HeightRequest="50">
                         <Entry Text="{Binding TextField}" Keyboard="{Binding Keyboard}" MaxLength="{Binding MaxLength}" />
                     </Border>
                 </VerticalStackLayout>
             </Grid>
 
-            <Grid IsVisible="{Binding IsConfirmField}">
+            <!-- Confirm Field -->
+            <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.ConfirmField}}">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Entry" />
                     <Border Stroke="Gray" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 25" StrokeThickness="1" HeightRequest="50">
                         <Entry Text="{Binding TextConfirmValue}" Keyboard="{Binding Keyboard}" MaxLength="{Binding MaxLength}" />
                     </Border>
 
-                    <Label Text="Confirm Entry" />
+                    <Label Text="Confirm" />
                     <Border Stroke="Gray" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 25" StrokeThickness="1" HeightRequest="50">
                         <Entry Text="{Binding TextConfirmValueRepeat}" Keyboard="{Binding Keyboard}" MaxLength="{Binding MaxLength}" />
                     </Border>
                 </VerticalStackLayout>
             </Grid>
 
-            <Grid IsVisible="{Binding IsConfirmFieldPassword}">
+            <!-- Confirm Field Password -->
+            <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.ConfirmFieldPassword}}">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Password" />
                     <Border Stroke="Gray" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 25" StrokeThickness="1" HeightRequest="50">
                         <Entry Text="{Binding PasswordValue}" IsPassword="True" Keyboard="{Binding Keyboard}" MaxLength="{Binding MaxLength}" />
                     </Border>
 
-                    <Label Text="Confirm Password" />
+                    <Label Text="Confirm" />
                     <Border Stroke="Gray" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 25" StrokeThickness="1" HeightRequest="50">
                         <Entry Text="{Binding PasswordValueRepeat}" IsPassword="True" Keyboard="{Binding Keyboard}" MaxLength="{Binding MaxLength}" />
                     </Border>
                 </VerticalStackLayout>
             </Grid>
 
-            <Grid IsVisible="{Binding IsCheckboxField}">
+            <!-- Single Checkbox -->
+            <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.SingleCheckbox}}">
                 <VerticalStackLayout Spacing="10">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -83,7 +86,8 @@
                 </VerticalStackLayout>
             </Grid>
 
-                <Grid IsVisible="{Binding IsInfoList}">
+            <!-- Info List -->
+            <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.InfoList}}">
                 <ScrollView>
                     <CollectionView ItemsSource="{Binding InfoItems}">
                         <CollectionView.ItemTemplate>

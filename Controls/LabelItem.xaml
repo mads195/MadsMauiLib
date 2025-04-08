@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mads195.MadsMauiLib.Controls.LabelItem"
+             x:Name="self">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding Source={x:Reference self}, Path=TapCommand}" NumberOfTapsRequired="1" />
+        </Grid.GestureRecognizers>
+        <Label x:Name="StartLabel" Text="{Binding Source={x:Reference self}, Path=TextStart}" VerticalOptions="Center" BackgroundColor="Transparent" Grid.Column="0" />
+        <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent" Spacing="10">
+            <Label x:Name="EndLabel" Text="{Binding Source={x:Reference self}, Path=TextEnd}" HorizontalTextAlignment="End" />
+            <Image Source="{Binding Source={x:Reference self}, Path=IconSource}" HeightRequest="{Binding Source={x:Reference self}, Path=IconHeight}" WidthRequest="{Binding Source={x:Reference self}, Path=IconWidth}" HorizontalOptions="End" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentView>

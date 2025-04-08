@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mads195.MadsMauiLib.Controls.SectionTitle">
-    <Grid Padding="0" RowSpacing="1" BackgroundColor="{Binding BackgroundColor}">
+             x:Class="Mads195.MadsMauiLib.Controls.SectionTitle"
+             x:Name="self">
+    <Grid Padding="0" RowSpacing="1" BackgroundColor="{Binding Source={x:Reference self}, Path=BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Padding="{Binding Padding}" BackgroundColor="Transparent" x:Name="TitleLabelPadding">
+        <Grid Grid.Row="0" Padding="{Binding Source={x:Reference self}, Path=Padding}" BackgroundColor="Transparent" x:Name="TitleLabelPadding">
             <Label x:Name="TitleLabel" 
-               Text="{Binding Text}"
-               HorizontalOptions="{Binding HorizontalOptions}" 
-               HorizontalTextAlignment="{Binding HorizontalTextAlignment}"
-               VerticalOptions="{Binding VerticalOptions}"
-               VerticalTextAlignment="{Binding VerticalTextAlignment}"
-               TextColor="{Binding TextColor}"
-               FontAttributes="{Binding FontAttributes}"/>
+               Text="{Binding Source={x:Reference self}, Path=Text}"
+               HorizontalOptions="{Binding Source={x:Reference self}, Path=HorizontalOptions}" 
+               HorizontalTextAlignment="{Binding Source={x:Reference self}, Path=HorizontalTextAlignment}"
+               VerticalOptions="{Binding Source={x:Reference self}, Path=VerticalOptions}"
+               VerticalTextAlignment="{Binding Source={x:Reference self}, Path=VerticalTextAlignment}"
+               TextColor="{Binding Source={x:Reference self}, Path=TextColor}"
+               FontAttributes="{Binding Source={x:Reference self}, Path=FontAttributes}"/>
         </Grid>
     </Grid>
 </ContentView>

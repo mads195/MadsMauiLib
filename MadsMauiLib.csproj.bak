@@ -20,9 +20,9 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.95</AssemblyVersion>
-		<FileVersion>1.0.95</FileVersion>
-		<Version>1.0.95</Version>
+		<AssemblyVersion>1.0.128</AssemblyVersion>
+		<FileVersion>1.0.128</FileVersion>
+		<Version>1.0.128</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
@@ -48,6 +48,7 @@
 		
 		<PackageReference Include="CommunityToolkit.Maui" Version="*" Condition="'$(TargetFramework)' == 'net9.0-android' Or '$(TargetFramework)' == 'net9.0-ios' Or '$(TargetFramework)' == 'net9.0-maccatalyst' Or '$(TargetFramework)' == 'net9.0-windows10.0.19041.0'" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.*" Condition="'$(TargetFramework)' == 'net8.0-android' Or '$(TargetFramework)' == 'net8.0-ios' Or '$(TargetFramework)' == 'net8.0-maccatalyst' Or '$(TargetFramework)' == 'net8.0-windows10.0.19041.0'" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 	</ItemGroup>
 
 	<ItemGroup>
