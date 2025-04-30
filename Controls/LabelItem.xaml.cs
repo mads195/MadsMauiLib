@@ -1,4 +1,5 @@
 using Mads195.MadsMauiLib.ViewModels.Controls;
+using Microsoft.Maui.Graphics.Text;
 using System.Windows.Input;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -7,10 +8,14 @@ namespace Mads195.MadsMauiLib.Controls;
 public partial class LabelItem : ContentView
 {
     public static readonly BindableProperty TextStartProperty =
-    BindableProperty.Create(nameof(TextStart), typeof(string), typeof(LabelItem), string.Empty);
+        BindableProperty.Create(nameof(TextStart), typeof(string), typeof(LabelItem), string.Empty);
+    public static readonly BindableProperty TextStartColorProperty =
+        BindableProperty.Create(nameof(TextStartColor), typeof(Color), typeof(LabelItem), Color.FromArgb("#000000"));
 
     public static readonly BindableProperty TextEndProperty =
-    BindableProperty.Create(nameof(TextEnd), typeof(string), typeof(LabelItem), string.Empty);
+        BindableProperty.Create(nameof(TextEnd), typeof(string), typeof(LabelItem), string.Empty);
+    public static readonly BindableProperty TextEndColorProperty =
+        BindableProperty.Create(nameof(TextEndColor), typeof(Color), typeof(LabelItem), Color.FromArgb("#000000"));
 
     public static readonly BindableProperty TapCommandProperty =
         BindableProperty.Create(nameof(TapCommand), typeof(ICommand), typeof(LabelItem));
@@ -29,10 +34,20 @@ public partial class LabelItem : ContentView
         get => (string)GetValue(TextStartProperty);
         set => SetValue(TextStartProperty, value);
     }
+    public Color TextStartColor
+    {
+        get => (Color)GetValue(TextStartColorProperty);
+        set => SetValue(TextStartColorProperty, value);
+    }
     public string TextEnd
     {
         get => (string)GetValue(TextEndProperty);
         set => SetValue(TextEndProperty, value);
+    }
+    public Color TextEndColor
+    {
+        get => (Color)GetValue(TextEndColorProperty);
+        set => SetValue(TextEndColorProperty, value);
     }
     public ICommand TapCommand
     {

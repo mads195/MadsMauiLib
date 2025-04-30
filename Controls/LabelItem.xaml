@@ -5,16 +5,28 @@
              x:Name="self">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.GestureRecognizers>
             <TapGestureRecognizer Command="{Binding Source={x:Reference self}, Path=TapCommand}" NumberOfTapsRequired="1" />
         </Grid.GestureRecognizers>
-        <Label x:Name="StartLabel" Text="{Binding Source={x:Reference self}, Path=TextStart}" VerticalOptions="Center" BackgroundColor="Transparent" Grid.Column="0" />
+        <Label x:Name="StartLabel" 
+               Text="{Binding Source={x:Reference self}, Path=TextStart}" 
+               VerticalOptions="Center" 
+               BackgroundColor="Transparent" 
+               Grid.Column="0" 
+               TextColor="{Binding Source={x:Reference self}, Path=TextStartColor}" />
         <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent" Spacing="10">
-            <Label x:Name="EndLabel" Text="{Binding Source={x:Reference self}, Path=TextEnd}" HorizontalTextAlignment="End" />
-            <Image Source="{Binding Source={x:Reference self}, Path=IconSource}" HeightRequest="{Binding Source={x:Reference self}, Path=IconHeight}" WidthRequest="{Binding Source={x:Reference self}, Path=IconWidth}" HorizontalOptions="End" />
+            <Label x:Name="EndLabel" 
+                   Text="{Binding Source={x:Reference self}, Path=TextEnd}" 
+                   HorizontalTextAlignment="End"
+                   TextColor="{Binding Source={x:Reference self}, Path=TextEndColor}"/>
+            <Image 
+                Source="{Binding Source={x:Reference self}, Path=IconSource}" 
+                HeightRequest="{Binding Source={x:Reference self}, Path=IconHeight}" 
+                WidthRequest="{Binding Source={x:Reference self}, Path=IconWidth}" 
+                HorizontalOptions="End" />
         </HorizontalStackLayout>
     </Grid>
 </ContentView>
