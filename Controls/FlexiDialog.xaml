@@ -106,6 +106,27 @@
                 </ScrollView>
             </Grid>
 
+            <!-- Date Selector -->
+            <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.DateTimePicker}}">
+                <FlexLayout JustifyContent="SpaceBetween">
+                    <Picker Title="{Binding DateSelectorDay}" />
+                    <Picker Title="{Binding DateSelectorMonth}" />
+                    <Picker Title="{Binding DateSelectorYear}" />
+                </FlexLayout> 
+            </Grid>
+            
+            <!-- Time Selector -->
+            <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.DateTimePicker}}">
+                <FlexLayout JustifyContent="SpaceBetween">
+                    <Button Text="-" Command="{Binding DateTimeChangeCommand}" CommandParameter="HourDecrease" />
+                    <Entry Text="{Binding SelectedHour}" Keyboard="Numeric" MaxLength="2" />
+                    <Button Text="+" Command="{Binding DateTimeChangeCommand}" CommandParameter="HourIncrease" />
+                    <Button Text="-" Command="{Binding DateTimeChangeCommand}" CommandParameter="MinuteDecrease" />
+                    <Entry Text="{Binding SelectedMinute}" Keyboard="Numeric" MaxLength="2" />
+                    <Button Text="+" Command="{Binding DateTimeChangeCommand}" CommandParameter="MinuteIncrease" />
+                </FlexLayout>
+            </Grid>
+
             <Grid>
                 <Grid.ColumnSpacing>10</Grid.ColumnSpacing>
                 <Grid.ColumnDefinitions>

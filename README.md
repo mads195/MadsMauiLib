@@ -1,14 +1,9 @@
 # Mads195.MadsMauiLib
 MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of classes and functions that are useful for developing applications with the Maui Framework.
-## New Features (April 2025)
-**FlexiDialog**
-- FlexiDialog has been extended to include two new dialog types: InfoList, a list of key/values and SingleCheckbox, a single checkbox with a label.
-- Simple share option for having a link that allows you to share a text value via the built-in share sheet
-- Hero message - simple prominent message
+## New Features (May 2025)
+**DateTimePicker**
+- DateTimePicker is a simple select type picker control allowing the independent selection of hours and minutes.
 
-**LabelItem**
-- Displays a left label and right aligned value - both are bindable.
-- LabelItem has been extended to include a bindable command that can be used to execute a command when the label is tapped.
 ## Controls
 ### FlexiDialog
 Built on **.NET MAUI CommunityToolKit Popup**, FlexiDialog is a pre-built dialog that can be used to show a message, ask for a confirmation, or ask for a password. There are 3 types of dialogs:
@@ -17,6 +12,7 @@ Built on **.NET MAUI CommunityToolKit Popup**, FlexiDialog is a pre-built dialog
 - ConfirmField - A text field that requires a confirmation
 - InfoList - A list of key values in two columns - column 1: key, column 2: value
 - SingleCheckbox - A checkbox with a label that passes back text values of `true` or `false`
+- DateTimePicker - A simple date/time picker that returns a **time (HH:mm)** value as a string. Date return will be added in v1.0.150.
 
 #### Usage
 **Example: password confirmation**

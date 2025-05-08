@@ -49,6 +49,10 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         string checkBoxLabel = "";
         [ObservableProperty]
         ObservableCollection<KeyValuePair<string, string>> infoItems = new();
+        [ObservableProperty]
+        int selectedHour = 0;
+        [ObservableProperty]
+        int selectedMinute = 0;
         /**
          * Bindable Properties - Private
          */
@@ -70,6 +74,9 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         string passwordValueRepeat;
         [ObservableProperty]
         string checkBoxValue;
+
+        public ObservableCollection<int> Hours { get; } = new ObservableCollection<int>(Enumerable.Range(0, 24));
+        public ObservableCollection<int> Minutes { get; } = new ObservableCollection<int>(Enumerable.Range(0, 60));
 
         internal readonly IPopupService popupService;
         public FlexiDialogViewModel(IPopupService popupService)
@@ -134,15 +141,12 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
             {
                 case FlexiDialogType.SingleField:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - SingleField");
-                    //IsSingleField = true;
                     break;
                 case FlexiDialogType.ConfirmField:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - ConfirmField");
-                    //IsConfirmField = true;
                     break;
                 case FlexiDialogType.ConfirmFieldPassword:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - ConfirmFieldPassword");
-                    //IsConfirmFieldPassword = true;
                     break;
                 case FlexiDialogType.InfoList:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - InfoList");
@@ -150,11 +154,12 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                     {
                         InfoItems = new ObservableCollection<KeyValuePair<string, string>>(InfoItems);
                     }
-                    //IsInfoList = true;
                     break;
                 case FlexiDialogType.SingleCheckbox:
                     Console.WriteLine("FlexiDialogViewModel.OnOpened - SingleCheckbox");
-                    //IsCheckboxField = true;
+                    break;
+                case FlexiDialogType.DateTimePicker:
+                    Console.WriteLine("FlexiDialogViewModel.OnOpened - DateTimePicker");
                     break;
             }
         }
@@ -219,6 +224,9 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                 case FlexiDialogType.SingleCheckbox:
                     vEntryValue = IsCheckboxFieldChecked ? "true" : "false";
                     break;
+                case FlexiDialogType.DateTimePicker:
+                    vEntryValue = $"{SelectedHour:D2}:{SelectedMinute:D2}";
+                    break;
             }
 
             /**
@@ -248,6 +256,46 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
 
             return oFlexiDialogResponseZ;
         }
+
+        [RelayCommand]
+        internal async void OnDateTimeChange(string parameter)
+        {
+            switch (parameter)
+            {
+                case "HourIncrease":
+                    if (SelectedHour < 23)
+                        SelectedHour++;
+                    break;
+
+                case "HourDecrease":
+                    if (SelectedHour > 0)
+                        SelectedHour--;
+                    break;
+
+                case "MinuteIncrease":
+                    if (SelectedMinute < 59)
+                        SelectedMinute++;
+                    else
+                    {
+                        SelectedMinute = 0;
+                        if (SelectedHour < 23)
+                            SelectedHour++;
+                    }
+                    break;
+
+                case "MinuteDecrease":
+                    if (SelectedMinute > 0)
+                        SelectedMinute--;
+                    else
+                    {
+                        SelectedMinute = 59;
+                        if (SelectedHour > 0)
+                            SelectedHour--;
+                    }
+                    break;
+            }
+        }
+
     }
 
     public enum FlexiDialogType
@@ -256,7 +304,8 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         ConfirmFieldPassword,
         ConfirmField,
         InfoList,
-        SingleCheckbox
+        SingleCheckbox,
+        DateTimePicker
     }
 
     public enum FlexiDialogButton
