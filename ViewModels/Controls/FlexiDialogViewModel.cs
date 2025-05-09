@@ -53,6 +53,12 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         int selectedHour = 0;
         [ObservableProperty]
         int selectedMinute = 0;
+        [ObservableProperty]
+        int selectedDay = DateTime.Now.Day;
+        [ObservableProperty]
+        int selectedMonth = DateTime.Now.Month;
+        [ObservableProperty]
+        int selectedYear = DateTime.Now.Year % 100;
         /**
          * Bindable Properties - Private
          */
@@ -225,7 +231,7 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                     vEntryValue = IsCheckboxFieldChecked ? "true" : "false";
                     break;
                 case FlexiDialogType.DateTimePicker:
-                    vEntryValue = $"{SelectedHour:D2}:{SelectedMinute:D2}";
+                    vEntryValue = $"{SelectedDay:D2}/{SelectedMonth:D2}/20{SelectedYear:D2} {SelectedHour:D2}:{SelectedMinute:D2}";
                     break;
             }
 
@@ -260,42 +266,109 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         [RelayCommand]
         internal async void OnDateTimeChange(string parameter)
         {
-            switch (parameter)
+            try
             {
-                case "HourIncrease":
-                    if (SelectedHour < 23)
-                        SelectedHour++;
-                    break;
-
-                case "HourDecrease":
-                    if (SelectedHour > 0)
-                        SelectedHour--;
-                    break;
-
-                case "MinuteIncrease":
-                    if (SelectedMinute < 59)
-                        SelectedMinute++;
-                    else
-                    {
-                        SelectedMinute = 0;
+                switch (parameter)
+                {
+                    case "HourIncrease":
                         if (SelectedHour < 23)
                             SelectedHour++;
-                    }
-                    break;
+                        else if (SelectedHour == 23)
+                        {
+                            SelectedHour = 0;
+                        }
+                        break;
 
-                case "MinuteDecrease":
-                    if (SelectedMinute > 0)
-                        SelectedMinute--;
-                    else
-                    {
-                        SelectedMinute = 59;
+                    case "HourDecrease":
                         if (SelectedHour > 0)
+                        {
                             SelectedHour--;
-                    }
-                    break;
+                        }
+                        else if (SelectedHour == 0)
+                        {
+                            SelectedHour = 23;
+                        }
+                        break;
+
+                    case "MinuteIncrease":
+                        if (SelectedMinute < 59)
+                            SelectedMinute++;
+                        else if (SelectedMinute == 59)
+                        {
+                            SelectedMinute = 0;
+                        }
+                        break;
+
+                    case "MinuteDecrease":
+                        if (SelectedMinute > 0)
+                            SelectedMinute--;
+                        else if (SelectedMinute == 0)
+                        {
+                            SelectedMinute = 59;
+                        }
+                        break;
+
+                    case "DayIncrease":
+                        int daysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
+                        if (SelectedDay < daysInMonth)
+                            SelectedDay++;
+                        else if (SelectedDay == daysInMonth)
+                        {
+                            SelectedDay = 1;
+                        }
+                        break;
+
+                    case "DayDecrease":
+                        if (SelectedDay > 1)
+                            SelectedDay--;
+                        break;
+
+                    case "MonthIncrease":
+                        if (SelectedMonth < 12)
+                            SelectedMonth++;
+                        else if (SelectedMonth == 12)
+                        {
+                            SelectedMonth = 1;
+                        }
+
+                        // Clamp day if it exceeds new month's limit
+                        ClampDay();
+                        break;
+
+                    case "MonthDecrease":
+                        if (SelectedMonth > 1)
+                            SelectedMonth--;
+                        else if (SelectedMonth == 0)
+                        {
+                            SelectedMonth = 12;
+                        }
+
+                        ClampDay();
+                        break;
+
+                    case "YearIncrease":
+                        SelectedYear++;
+                        ClampDay();
+                        break;
+
+                    case "YearDecrease":
+                        SelectedYear--;
+                        ClampDay();
+                        break;
+                }
+            }
+            catch(Exception ex)
+            {
+                // Handle any exceptions that may occur
+                Console.WriteLine($"Error in OnDateTimeChange: {ex.Message}");
             }
         }
-
+        private void ClampDay()
+        {
+            int maxDay = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
+            if (SelectedDay > maxDay)
+                SelectedDay = maxDay;
+        }
     }
 
     public enum FlexiDialogType

@@ -4,20 +4,22 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:popups="clr-namespace:Mads195.MadsMauiLib.Controls"
              xmlns:vm="clr-namespace:Mads195.MadsMauiLib.ViewModels.Controls"
+             xmlns:converters="clr-namespace:Mads195.MadsMauiLib.Converters"
              x:Name="this"
                Color="Transparent"
              x:Class="Mads195.MadsMauiLib.Controls.FlexiDialog">
-        
+
     <toolkit:Popup.Resources>
         <Style TargetType="{x:Type popups:FlexiDialog}">
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="VerticalOptions" Value="Start" />
             <Setter Property="CanBeDismissedByTappingOutsideOfPopup" Value="True" />
         </Style>
-        
+
         <ResourceDictionary>
             <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
             <toolkit:EnumToBoolConverter x:Key="PlatformConverter" />
+            <converters:TwoDigitConverter x:Key="TwoDigitConverter" />
         </ResourceDictionary>
     </toolkit:Popup.Resources>
 
@@ -108,23 +110,190 @@
 
             <!-- Date Selector -->
             <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.DateTimePicker}}">
-                <FlexLayout JustifyContent="SpaceBetween">
-                    <Picker Title="{Binding DateSelectorDay}" />
-                    <Picker Title="{Binding DateSelectorMonth}" />
-                    <Picker Title="{Binding DateSelectorYear}" />
-                </FlexLayout> 
+                <VerticalStackLayout>
+                    <popups:SectionTitle Text="Date" FontAttributes="Bold" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <FlexLayout JustifyContent="SpaceBetween">
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_up_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="DayIncrease"/>
+
+                                    <Entry Text="{Binding SelectedDay, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
+
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_down_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="DayDecrease"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <Image Source="mml_slash.png" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_up_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="MonthIncrease"/>
+
+                                    <Entry Text="{Binding SelectedMonth, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
+
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_down_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="MonthDecrease"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <Image Source="mml_slash.png" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_up_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="YearIncrease"/>
+                                    <Entry Text="{Binding SelectedYear}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_down_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="YearDecrease"/>
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+
+                        </Grid>
+                    </Grid>
+                </VerticalStackLayout>
             </Grid>
-            
+
             <!-- Time Selector -->
             <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.DateTimePicker}}">
-                <FlexLayout JustifyContent="SpaceBetween">
-                    <Button Text="-" Command="{Binding DateTimeChangeCommand}" CommandParameter="HourDecrease" />
-                    <Entry Text="{Binding SelectedHour}" Keyboard="Numeric" MaxLength="2" />
-                    <Button Text="+" Command="{Binding DateTimeChangeCommand}" CommandParameter="HourIncrease" />
-                    <Button Text="-" Command="{Binding DateTimeChangeCommand}" CommandParameter="MinuteDecrease" />
-                    <Entry Text="{Binding SelectedMinute}" Keyboard="Numeric" MaxLength="2" />
-                    <Button Text="+" Command="{Binding DateTimeChangeCommand}" CommandParameter="MinuteIncrease" />
-                </FlexLayout>
+                <VerticalStackLayout>
+                    <popups:SectionTitle Text="Time" FontAttributes="Bold" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="80" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <FlexLayout JustifyContent="SpaceBetween">
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_up_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="HourIncrease"/>
+                                    <Entry Text="{Binding SelectedHour, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_down_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="HourDecrease"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <Image Source="mml_two_dots_vertical.png" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_up_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="MinuteIncrease"/>
+                                    <Entry Text="{Binding SelectedMinute, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
+                                    <popups:OutlineButton 
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="1" 
+                                        StrokeColor="Black" 
+                                        MaximumWidthRequest="40" 
+                                        CornerRadius="10" 
+                                        ImageSource="mml_caret_down_fill.png"
+                                        Command="{Binding DateTimeChangeCommand}"
+                                        CommandParameter="MinuteDecrease"/>
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+
+                        </Grid>
+                    </Grid>
+
+                    <!--<FlexLayout JustifyContent="SpaceBetween">
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Button ImageSource="caret_up.png" Command="{Binding DateTimeChangeCommand}" CommandParameter="HourIncrease" />
+                        <Entry Text="{Binding SelectedHour, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" />
+                        <Button ImageSource="caret_down.png" Command="{Binding DateTimeChangeCommand}" CommandParameter="HourDecrease" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Image Source="two_dots_vertical.png" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Button ImageSource="caret_up.png" Command="{Binding DateTimeChangeCommand}" CommandParameter="MinuteIncrease" />
+                        <Entry Text="{Binding SelectedMinute, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" />
+                        <Button ImageSource="caret_down.png" Command="{Binding DateTimeChangeCommand}" CommandParameter="MinuteDecrease" />
+                    </VerticalStackLayout>
+                </FlexLayout>-->
+                </VerticalStackLayout>
             </Grid>
 
             <Grid>

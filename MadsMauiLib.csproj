@@ -20,9 +20,9 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.147</AssemblyVersion>
-		<FileVersion>1.0.147</FileVersion>
-		<Version>1.0.147</Version>
+		<AssemblyVersion>1.0.165</AssemblyVersion>
+		<FileVersion>1.0.165</FileVersion>
+		<Version>1.0.165</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
@@ -34,6 +34,8 @@
 	<ItemGroup>
 	  <None Remove="Directory.Build.props" />
 	  <None Remove="Directory.Build.props.bak" />
+	  <None Remove="Resources\Images\mml_caret_down_fill.svg" />
+	  <None Remove="Resources\Images\mml_caret_up_fill.svg" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -54,6 +56,12 @@
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Views\" />
+	  <MauiImage Include="Resources\Images\mml_caret_down.svg" />
+	  <MauiImage Include="Resources\Images\mml_caret_down_fill.svg" />
+	  <MauiImage Include="Resources\Images\mml_caret_up.svg" />
+	  <MauiImage Include="Resources\Images\mml_caret_up_fill.svg" />
+	  <MauiImage Include="Resources\Images\mml_slash.svg" />
+	  <MauiImage Include="Resources\Images\mml_two_dots_vertical.svg" />
 	  <None Include="README.md" Pack="true" PackagePath="\" />
 	  <None Include="LICENSE.TXT" Pack="true" PackagePath="\" />
 	</ItemGroup>
@@ -67,6 +75,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\FlexiDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\OutlineButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\SectionTitle.xaml">

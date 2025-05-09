@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mads195.MadsMauiLib.Controls.OutlineButton"
+             x:Name="self">
+    <Border StrokeThickness="{Binding Source={x:Reference self}, Path=StrokeThickness}" Stroke="{Binding Source={x:Reference self}, Path=StrokeColor}" MaximumWidthRequest="{Binding Source={x:Reference self}, Path=MaximumWidthRequest}" BackgroundColor="{Binding Source={x:Reference self}, Path=BackgroundColor}">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="{Binding Source={x:Reference self}, Path=CornerRadius}" />
+        </Border.StrokeShape>
+        <Button 
+            WidthRequest="{Binding Source={x:Reference self}, Path=MaximumWidthRequest}"
+            ImageSource="{Binding Source={x:Reference self}, Path=ImageSource}" 
+            Command="{Binding Source={x:Reference self}, Path=Command}" 
+            CommandParameter="{Binding Source={x:Reference self}, Path=CommandParameter}" 
+            BackgroundColor="Transparent" />
+    </Border>
+</ContentView>
