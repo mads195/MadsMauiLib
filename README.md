@@ -5,6 +5,8 @@ MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of c
 - DateTimePicker is a simple select type picker control allowing the independent selection of hours and minutes.
 **TwoDigitConverter**
 - TwoDigitConverter is a converter that converts a number to a two digit string. It is used where a leading zero should be displayed such as an hour, minute, day or month value but that value is stored as an integer.
+**General Updates**
+- Updated SQLite database library to use FileSystem.AppDataDirectory. Previously, Environment.SpecialFolder.LocalApplicationData was used but the final resolved path depended on the packaging model of the app that uses this package (TL;DR; Environment.SpecialFolder.LocalApplicationData behaves differently depending on release or debug). 
 
 ## Getting Started
 MadsMauiLib can be installed via Nuget. Recommend that MauiCommunityToolkit is also installed. Once installed, register the package in your MauiProgram.cs file:

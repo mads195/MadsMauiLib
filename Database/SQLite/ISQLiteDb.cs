@@ -24,7 +24,12 @@ namespace Mads195.MadsMauiLib.Database.SQLite
 
         Task<int> DeleteDataAsync<T>(T data) where T : new();
 
-        Task<List<T>> Query<T>(string sqlQuery) where T : new();
+        Task<List<T>> QueryAsync<T>(string sqlQuery) where T : new();
+
+        Task<List<T>> QueryAsync<T>(string sqlQuery, params object[] args) where T : new();
+
+        string GetDatabasePath();
+        
         bool DatabaseExists();
         bool InitializeDatabase();
     }

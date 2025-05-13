@@ -26,7 +26,7 @@ namespace Mads195.MadsMauiLib
                 fonts.AddFont("FontAwesome6Brands-Regular-400.otf", "FontAwesome6BrandsRegular");
             });
 
-            builder.Services.AddSingleton<ISQLiteDb>(new SQLiteDb("AppData"));
+            builder.Services.AddSingleton<ISQLiteDb>(new SQLiteDb("MyAppData", FileSystem.AppDataDirectory));
 
             builder.Services.AddTransientPopup<FlexiDialog, FlexiDialogViewModel>();
 

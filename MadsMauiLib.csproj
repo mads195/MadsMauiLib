@@ -20,9 +20,9 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.165</AssemblyVersion>
-		<FileVersion>1.0.165</FileVersion>
-		<Version>1.0.165</Version>
+		<AssemblyVersion>1.0.170</AssemblyVersion>
+		<FileVersion>1.0.170</FileVersion>
+		<Version>1.0.170</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
