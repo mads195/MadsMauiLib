@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">	
+﻿<Project Sdk="Microsoft.NET.Sdk">	
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android;net9.0-android;net8.0-ios;net9.0-ios;net8.0-maccatalyst;net9.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0;net9.0-windows10.0.19041.0</TargetFrameworks>
@@ -20,9 +20,9 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.170</AssemblyVersion>
-		<FileVersion>1.0.170</FileVersion>
-		<Version>1.0.170</Version>
+		<AssemblyVersion>1.0.175</AssemblyVersion>
+		<FileVersion>1.0.175</FileVersion>
+		<Version>1.0.175</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
@@ -30,12 +30,14 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/mads195/MadsMauiLib</PackageProjectUrl>
+		<PackageIcon>mml_stripes_base_128px.png</PackageIcon>
 	</PropertyGroup>	
 	<ItemGroup>
 	  <None Remove="Directory.Build.props" />
 	  <None Remove="Directory.Build.props.bak" />
 	  <None Remove="Resources\Images\mml_caret_down_fill.svg" />
 	  <None Remove="Resources\Images\mml_caret_up_fill.svg" />
+	  <None Remove="Resources\Images\mml_pencil_square.svg" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -60,10 +62,12 @@
 	  <MauiImage Include="Resources\Images\mml_caret_down_fill.svg" />
 	  <MauiImage Include="Resources\Images\mml_caret_up.svg" />
 	  <MauiImage Include="Resources\Images\mml_caret_up_fill.svg" />
+	  <MauiImage Include="Resources\Images\mml_pencil_square.svg" />
 	  <MauiImage Include="Resources\Images\mml_slash.svg" />
 	  <MauiImage Include="Resources\Images\mml_two_dots_vertical.svg" />
 	  <None Include="README.md" Pack="true" PackagePath="\" />
 	  <None Include="LICENSE.TXT" Pack="true" PackagePath="\" />
+    <None Include="mml_stripes_base_128px.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	
 	<ItemGroup>

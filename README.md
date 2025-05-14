@@ -1,8 +1,16 @@
+<p align="center">
+  <img src="https://mads195.s3.eu-west-2.amazonaws.com/public/mads195/mml_horizontal_300px.png" alt="MadsMauiLib"/>
+</p>
+
 # Mads195.MadsMauiLib
 MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of classes and functions that are useful for developing applications with the Maui Framework.
 ## New Features (May 2025)
 **DateTimePicker**
 - DateTimePicker is a simple select type picker control allowing the independent selection of hours and minutes.
+**DateTimeFormatConverter**
+- The DateTimeFormatConverter is a converter that converts a datetime value to a formatted string. Any valid C# datetime format can be specified as the parameter.
+**MultiValueMatchConverter**
+- MultiValueMatchConverter is a converter that takes multiple values and returns a boolean value. It is used to determine if each property matches a specific value.
 **TwoDigitConverter**
 - TwoDigitConverter is a converter that converts a number to a two digit string. It is used where a leading zero should be displayed such as an hour, minute, day or month value but that value is stored as an integer.
 **General Updates**
@@ -84,12 +92,12 @@ Section title simply displays a consistently formatted title to use within a vie
 #### Usage
 ```
 <ContentPage ...
-             xmlns:madsmauilib="clr-namespace:Mads195.MadsMauiLib.Controls;assembly=MadsMauiLib"
+             xmlns:mmlcontrols="clr-namespace:Mads195.MadsMauiLib.Controls;assembly=MadsMauiLib"
              ...>
 ```
 
 ```
-<madsmauilib:SectionTitle Text="Hello Mads195!" Padding="20,0,20,0" TextColor="Red" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" />
+<mmlcontrols:SectionTitle Text="Hello Mads195!" Padding="20,0,20,0" TextColor="Red" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" />
 ```
 
 ### LabelItem
@@ -98,36 +106,78 @@ Displays a label and a value. The label is on the left and the value is on the r
 #### Usage
 ```
 <ContentPage ...
-             xmlns:madsmauilib="clr-namespace:Mads195.MadsMauiLib.Controls;assembly=MadsMauiLib"
+             xmlns:mmlcontrols="clr-namespace:Mads195.MadsMauiLib.Controls;assembly=MadsMauiLib"
              ...>
 ```
 
 ```
-<madsmauilib:LabelItem TextStart="Check Database" TextEnd="{Binding DatabaseCheck}" TapCommand="{Binding CheckDatabaseCommand}" Padding="0,10" />
+<mmlcontrols:LabelItem TextStart="Check Database" TextEnd="{Binding DatabaseCheck}" TapCommand="{Binding CheckDatabaseCommand}" Padding="0,10" />
 ```
 
 ## Converters
+Load the converters in your XAML file:
+```
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             ...
+             xmlns:mmlconverters="clr-namespace:Mads195.MadsMauiLib.Converters;assembly=MadsMauiLib"
+             ...
+             >
+```
+
 ### TwoDigitConverter
 TwoDigitConverter is a converter that converts a number to a two digit string. It is used where a leading zero should be displayed such as an hour, minute, day or month value but that value is stored as an integer.
 
 #### Usage
 ```
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             ...
-             xmlns:converters="clr-namespace:Mads195.MadsMauiLib.Converters"
-             ...
-             >
-```
-
-```
 <ResourceDictionary>
-    <converters:TwoDigitConverter x:Key="TwoDigitConverter" />
+    <mmlconverters:TwoDigitConverter x:Key="TwoDigitConverter" />
 </ResourceDictionary>
 ```
 
 ```
 <Entry Text="{Binding SelectedHour, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" />
+```
+
+### DateTimeFormatConverter
+DateTimeFormatConverter is a converter that converts a datetime value to a formatted string. Any valid C# datetime format can be specified as the parameter.
+
+#### Usage
+```
+<ResourceDictionary>
+    <mmlconverters:DateTimeFormatConverter x:Key="DateTimeFormatConverter" />
+</ResourceDictionary>
+```
+
+```
+<Entry Text="{Binding OurDateTimeValue, Converter={StaticResource DateTimeFormatConverter}, ConverterParameter='dd/MM/yyyy HH:mm'}" />
+```
+
+### MultiValueMatchConverter
+MultiValueMatchConverter is a converter that takes multiple values and returns a boolean value. It is used to determine if each property matches a specific value.
+
+#### Usage
+```
+<ResourceDictionary>
+    <mmlconverters:MultiValueMatchConverter x:Key="MultiValueMatchConverter" />
+</ResourceDictionary>
+```
+
+```
+<Label Text="Conditions met!"
+       IsVisible="{Binding Source={x:Reference SomeView},
+                           Path=BindingContext,
+                           Converter={StaticResource MultiValueMatchConverter},
+                           ConverterParameter='Online,Active,true'}">
+    <Label.BindingContext>
+        <MultiBinding Converter="{StaticResource MultiValueMatchConverter}" 
+                      ConverterParameter="Online,Active,true">
+            <Binding Path="Status" />
+            <Binding Path="Mode" />
+            <Binding Path="Flag" />
+        </MultiBinding>
+    </Label.BindingContext>
+</Label>
 ```
 
 ## Notes
