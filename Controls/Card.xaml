@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mmlconverters="clr-namespace:Mads195.MadsMauiLib.Converters"
              x:Class="Mads195.MadsMauiLib.Controls.Card"
              x:Name="self">
     
@@ -9,10 +10,7 @@
         <ResourceDictionary>
             <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
-            <toolkit:VariableMultiValueConverter 
-                x:Key="VariableMultiValueConverter"
-                ConditionType="Exact"
-                Count="2" />
+            <mmlconverters:MultiValueMatchConverter x:Key="MultiValueMatchConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     
@@ -32,7 +30,18 @@
                 <Grid Padding="20,0,20,20">
                     <FlexLayout JustifyContent="SpaceBetween" Padding="20,10">
                         <Entry Text="{Binding Source={x:Reference self}, Path=CardContent}" IsEnabled="False" Placeholder="{Binding Source={x:Reference self}, Path=Title}" />
-                        <Image Source="{Binding Source={x:Reference self}, Path=IconSource}" IsVisible="{Binding Source={x:Reference self}, Path=ShowEditIcon}" Margin="20,0,0,0" />
+                        <Image Source="{Binding Source={x:Reference self}, Path=IconSource}" IsVisible="{Binding Source={x:Reference self},
+                           Path=BindingContext,
+                           Converter={StaticResource MultiValueMatchConverter},
+                           ConverterParameter='true,false'}" Margin="20,0,0,0">
+                            <Image.BindingContext>
+                                <MultiBinding Converter="{StaticResource MultiValueMatchConverter}" 
+                      ConverterParameter="Online,Active,true">
+                                    <Binding Path="ShowEditIcon" />
+                                    <Binding Path="ShowTitle" />
+                                </MultiBinding>
+                            </Image.BindingContext>
+                        </Image>
                     </FlexLayout>
                 </Grid>
             </VerticalStackLayout>

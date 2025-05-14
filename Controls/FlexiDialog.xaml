@@ -4,7 +4,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:popups="clr-namespace:Mads195.MadsMauiLib.Controls"
              xmlns:vm="clr-namespace:Mads195.MadsMauiLib.ViewModels.Controls"
-             xmlns:converters="clr-namespace:Mads195.MadsMauiLib.Converters"
+             xmlns:mmlconverters="clr-namespace:Mads195.MadsMauiLib.Converters"
              x:Name="this"
                Color="Transparent"
              x:Class="Mads195.MadsMauiLib.Controls.FlexiDialog">
@@ -19,7 +19,7 @@
         <ResourceDictionary>
             <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
             <toolkit:EnumToBoolConverter x:Key="PlatformConverter" />
-            <converters:TwoDigitConverter x:Key="TwoDigitConverter" />
+            <mmlconverters:TwoDigitConverter x:Key="TwoDigitConverter" />
         </ResourceDictionary>
     </toolkit:Popup.Resources>
 
