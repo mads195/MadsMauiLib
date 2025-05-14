@@ -13,34 +13,42 @@
             <mmlconverters:MultiValueMatchConverter x:Key="MultiValueMatchConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    
-    <Border HorizontalOptions="Fill" StrokeThickness="{Binding Source={x:Reference self}, Path=StrokeThickness}" Stroke="{Binding Source={x:Reference self}, Path=StrokeColor}" BackgroundColor="{Binding Source={x:Reference self}, Path=BackgroundColor}">
+
+    <Border HorizontalOptions="Fill" StrokeThickness="{Binding Source={x:Reference self}, Path=BorderThickness}" Stroke="{Binding Source={x:Reference self}, Path=BorderColor}" WidthRequest="{Binding Source={x:Reference self}, Path=WidthRequest}">
         <Border.StrokeShape>
-            <RoundRectangle CornerRadius="15" />
+            <RoundRectangle CornerRadius="{Binding Source={x:Reference self}, Path=BorderRadius}" />
         </Border.StrokeShape>
 
         <Grid>
             <Button Command="{Binding Source={x:Reference self}, Path=Command}" CommandParameter="{Binding Source={x:Reference self}, Path=CommandParameter}" BackgroundColor="Transparent" />
-            <VerticalStackLayout>
-                <FlexLayout JustifyContent="SpaceBetween" Padding="20,10" IsVisible="{Binding ShowTitle}">
-                    <Label Text="{Binding Source={x:Reference self}, Path=Title}" FontAttributes="{Binding Source={x:Reference self}, Path=TitleFontAttributes}" />
-                    <Image Source="{Binding Source={x:Reference self}, Path=IconSource}" IsVisible="{Binding Source={x:Reference self}, Path=ShowEditIcon}" Margin="20,0,0,0" />
+            <VerticalStackLayout BackgroundColor="{Binding Source={x:Reference self}, Path=TitleBackgroundColor}">
+                <FlexLayout JustifyContent="SpaceBetween" Padding="20,10" IsVisible="{Binding Source={x:Reference self}, Path=ShowTitle}">
+                    <Label Text="{Binding Source={x:Reference self}, Path=Title}" FontAttributes="{Binding Source={x:Reference self}, Path=TitleFontAttributes}" TextColor="{Binding Source={x:Reference self}, Path=TitleTextColor}" />
+                    <Image Source="{Binding Source={x:Reference self}, Path=EditIcon}" IsVisible="{Binding Source={x:Reference self}, Path=ShowEditIcon}" Margin="20,0,0,0" />
                 </FlexLayout>
-                <Grid HeightRequest="1" BackgroundColor="LightGray" Margin="0,0,0,20" IsVisible="{Binding Source={x:Reference self}, Path=ShowSeparator}" />
-                <Grid Padding="20,0,20,20">
-                    <FlexLayout JustifyContent="SpaceBetween" Padding="20,10">
-                        <Entry Text="{Binding Source={x:Reference self}, Path=CardContent}" IsEnabled="False" Placeholder="{Binding Source={x:Reference self}, Path=Title}" />
-                        <Image Source="{Binding Source={x:Reference self}, Path=IconSource}" IsVisible="{Binding Source={x:Reference self},
-                           Path=BindingContext,
-                           Converter={StaticResource MultiValueMatchConverter},
-                           ConverterParameter='true,false'}" Margin="20,0,0,0">
-                            <Image.BindingContext>
-                                <MultiBinding Converter="{StaticResource MultiValueMatchConverter}" 
-                      ConverterParameter="Online,Active,true">
-                                    <Binding Path="ShowEditIcon" />
-                                    <Binding Path="ShowTitle" />
+                <Grid HeightRequest="1" BackgroundColor="LightGray">
+                    <Grid.IsVisible>
+                        <MultiBinding Converter="{StaticResource MultiValueMatchConverter}" ConverterParameter="True,True">
+                            <Binding Source="{x:Reference self}" Path="ShowTitle" />
+                            <Binding Source="{x:Reference self}" Path="ShowSeparator" />
+                        </MultiBinding>
+                    </Grid.IsVisible>
+                </Grid>
+                <Grid Padding="20,0,20,0" BackgroundColor="{Binding Source={x:Reference self}, Path=ContentBackgroundColor}">
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <Entry Text="{Binding Source={x:Reference self}, Path=CardContent}" IsReadOnly="True" Placeholder="{Binding Source={x:Reference self}, Path=Title}" TextColor="{Binding Source={x:Reference self}, Path=ContentTextColor}">
+                            <Entry.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference self}, Path=Command}" CommandParameter="{Binding Source={x:Reference self}, Path=CommandParameter}" NumberOfTapsRequired="1" />
+                            </Entry.GestureRecognizers>
+                        </Entry>
+
+                        <Image Source="{Binding Source={x:Reference self}, Path=EditIcon}" Margin="20,0,0,0">
+                            <Image.IsVisible>
+                                <MultiBinding Converter="{StaticResource MultiValueMatchConverter}" ConverterParameter="True,False">
+                                    <Binding Source="{x:Reference self}" Path="ShowEditIcon" />
+                                    <Binding Source="{x:Reference self}" Path="ShowTitle" />
                                 </MultiBinding>
-                            </Image.BindingContext>
+                            </Image.IsVisible>
                         </Image>
                     </FlexLayout>
                 </Grid>

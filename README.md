@@ -154,7 +154,7 @@ DateTimeFormatConverter is a converter that converts a datetime value to a forma
 ```
 
 ### MultiValueMatchConverter
-MultiValueMatchConverter is a converter that takes multiple values and returns a boolean value. It is used to determine if each property matches a specific value.
+MultiValueMatchConverter is a converter that takes multiple values and returns a boolean value. It is used to determine if each property matches a specific value. In the following example, the image is only visible if the first binding is `True` and the second binding is `False`. The converter parameter is a comma separated list of values that are used to compare against the bindings. The first value in the list is compared against the first binding, the second value is compared against the second binding, and so on. If all values match, the converter returns `True`, otherwise it returns `False`.
 
 #### Usage
 ```
@@ -164,20 +164,14 @@ MultiValueMatchConverter is a converter that takes multiple values and returns a
 ```
 
 ```
-<Label Text="Conditions met!"
-       IsVisible="{Binding Source={x:Reference SomeView},
-                           Path=BindingContext,
-                           Converter={StaticResource MultiValueMatchConverter},
-                           ConverterParameter='Online,Active,true'}">
-    <Label.BindingContext>
-        <MultiBinding Converter="{StaticResource MultiValueMatchConverter}" 
-                      ConverterParameter="Online,Active,true">
-            <Binding Path="Status" />
-            <Binding Path="Mode" />
-            <Binding Path="Flag" />
+<Image Source="{Binding Source={x:Reference self}, Path=IconSource}" Margin="20,0,0,0">
+    <Image.IsVisible>
+        <MultiBinding Converter="{StaticResource MultiValueMatchConverter}" ConverterParameter="True,False">
+            <Binding Path="ShowEditIcon" />
+            <Binding Path="ShowTitle" />
         </MultiBinding>
-    </Label.BindingContext>
-</Label>
+    </Image.IsVisible>
+</Image>
 ```
 
 ## Notes

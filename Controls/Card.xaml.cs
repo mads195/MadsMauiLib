@@ -1,3 +1,4 @@
+using Microsoft.Maui;
 using System.Windows.Input;
 
 namespace Mads195.MadsMauiLib.Controls;
@@ -12,22 +13,30 @@ public partial class Card : ContentView
         BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(Card));
     public static readonly BindableProperty CommandParameterProperty =
         BindableProperty.Create(nameof(CommandParameter), typeof(string), typeof(Card), string.Empty);
-    public static readonly BindableProperty StrokeColorProperty =
-        BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(Card), Color.FromArgb("#000000"));
-    public static readonly BindableProperty BackgroundColorProperty =
-        BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(Card), Color.FromArgb("#ffffff"));
-    public static readonly BindableProperty IconSourceProperty =
-        BindableProperty.Create(nameof(IconSource), typeof(string), typeof(Card), "mml_pencil_square.png");
+    public static readonly BindableProperty BorderColorProperty =
+        BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(Card), Color.FromArgb("#000000"));
+    public static readonly BindableProperty TitleBackgroundColorProperty =
+        BindableProperty.Create(nameof(TitleBackgroundColor), typeof(Color), typeof(Card), Color.FromArgb("#ffffff"));
+    public static readonly BindableProperty ContentBackgroundColorProperty =
+        BindableProperty.Create(nameof(ContentBackgroundColor), typeof(Color), typeof(Card), Color.FromArgb("#ffffff"));
+    public static readonly BindableProperty TitleTextColorProperty =
+        BindableProperty.Create(nameof(TitleTextColor), typeof(Color), typeof(Card), Color.FromArgb("#000000"));
+    public static readonly BindableProperty ContentTextColorProperty =
+        BindableProperty.Create(nameof(ContentTextColor), typeof(Color), typeof(Card), Color.FromArgb("#000000"));
+    public static readonly BindableProperty EditIconProperty =
+        BindableProperty.Create(nameof(EditIcon), typeof(string), typeof(Card), "mml_pencil_square.png");
     public static readonly BindableProperty ShowEditIconProperty =
         BindableProperty.Create(nameof(ShowEditIcon), typeof(bool), typeof(Card), false);
-    public static readonly BindableProperty StrokeThicknessProperty =
-        BindableProperty.Create(nameof(StrokeThickness), typeof(int), typeof(Card), 1);
+    public static readonly BindableProperty BorderThicknessProperty =
+        BindableProperty.Create(nameof(BorderThickness), typeof(int), typeof(Card), 1);
     public static readonly BindableProperty ShowSeparatorProperty =
         BindableProperty.Create(nameof(ShowSeparator), typeof(bool), typeof(Card), false);
     public static readonly BindableProperty TitleFontAttributesProperty =
         BindableProperty.Create(nameof(TitleFontAttributes), typeof(FontAttributes), typeof(Card), FontAttributes.Bold);
     public static readonly BindableProperty ShowTitleProperty =
         BindableProperty.Create(nameof(ShowTitle), typeof(bool), typeof(Card), true);
+    public static readonly BindableProperty BorderRadiusProperty =
+        BindableProperty.Create(nameof(BorderRadius), typeof(int), typeof(Card), 15);
 
     public string Title
     {
@@ -49,25 +58,45 @@ public partial class Card : ContentView
         get => (string)GetValue(CommandParameterProperty);
         set => SetValue(CommandParameterProperty, value);
     }
-    public int StrokeThickness
+    public int BorderThickness
     {
-        get => (int)GetValue(StrokeThicknessProperty);
-        set => SetValue(StrokeThicknessProperty, value);
+        get => (int)GetValue(BorderThicknessProperty);
+        set => SetValue(BorderThicknessProperty, value);
     }
-    public Color StrokeColor
+    public Color BorderColor
     {
-        get => (Color)GetValue(StrokeColorProperty);
-        set => SetValue(StrokeColorProperty, value);
+        get => (Color)GetValue(BorderColorProperty);
+        set => SetValue(BorderColorProperty, value);
     }
-    public Color BackgroundColor
+    public int BorderRadius
     {
-        get => (Color)GetValue(BackgroundColorProperty);
-        set => SetValue(BackgroundColorProperty, value);
+        get => (int)GetValue(BorderRadiusProperty);
+        set => SetValue(BorderRadiusProperty, value);
     }
-    public string IconSource
+    public Color TitleBackgroundColor
     {
-        get => (string)GetValue(IconSourceProperty);
-        set => SetValue(IconSourceProperty, value);
+        get => (Color)GetValue(TitleBackgroundColorProperty);
+        set => SetValue(TitleBackgroundColorProperty, value);
+    }
+    public Color ContentBackgroundColor
+    {
+        get => (Color)GetValue(ContentBackgroundColorProperty);
+        set => SetValue(ContentBackgroundColorProperty, value);
+    }
+    public Color TitleTextColor
+    {
+        get => (Color)GetValue(TitleTextColorProperty);
+        set => SetValue(TitleTextColorProperty, value);
+    }
+    public Color ContentTextColor
+    {
+        get => (Color)GetValue(ContentTextColorProperty);
+        set => SetValue(ContentTextColorProperty, value);
+    }
+    public string EditIcon
+    {
+        get => (string)GetValue(EditIconProperty);
+        set => SetValue(EditIconProperty, value);
     }
     public bool ShowEditIcon
     {
@@ -89,6 +118,7 @@ public partial class Card : ContentView
         get => (bool)GetValue(ShowTitleProperty);
         set => SetValue(ShowTitleProperty, value);
     }
+
 
     public Card()
 	{
