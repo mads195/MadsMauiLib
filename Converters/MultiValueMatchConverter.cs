@@ -25,7 +25,7 @@ namespace Mads195.MadsMauiLib.Converters
             {
                 var current = values[i]?.ToString()?.Trim();
                 var expected = expectedValues[i]?.Trim();
-
+                
                 if (!string.Equals(current, expected, StringComparison.OrdinalIgnoreCase))
                     return false;
             }

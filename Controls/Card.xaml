@@ -9,6 +9,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <toolkit:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+            <toolkit:IsStringNullOrEmptyConverter x:Key="IsStringNullOrEmptyConverter" />
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
             <mmlconverters:MultiValueMatchConverter x:Key="MultiValueMatchConverter" />
         </ResourceDictionary>
@@ -34,23 +35,24 @@
                         </MultiBinding>
                     </Grid.IsVisible>
                 </Grid>
-                <Grid Padding="20,0,20,0" BackgroundColor="{Binding Source={x:Reference self}, Path=ContentBackgroundColor}">
-                    <FlexLayout JustifyContent="SpaceBetween">
-                        <Entry Text="{Binding Source={x:Reference self}, Path=CardContent}" IsReadOnly="True" Placeholder="{Binding Source={x:Reference self}, Path=Title}" TextColor="{Binding Source={x:Reference self}, Path=ContentTextColor}">
-                            <Entry.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:Reference self}, Path=Command}" CommandParameter="{Binding Source={x:Reference self}, Path=CommandParameter}" NumberOfTapsRequired="1" />
-                            </Entry.GestureRecognizers>
-                        </Entry>
+                <Grid Padding="20,10" BackgroundColor="{Binding Source={x:Reference self}, Path=ContentBackgroundColor}">
+                    <VerticalStackLayout Spacing="10">
+                        <FlexLayout JustifyContent="SpaceBetween" IsVisible="{Binding Source={x:Reference self}, Path=ShowCardContent}">
+                            <Label Text="{Binding Source={x:Reference self}, Path=CardContent}" IsVisible="{Binding Source={x:Reference self}, Path=CardContent, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
+                            <Label Text="{Binding Source={x:Reference self}, Path=Title}" IsVisible="{Binding Source={x:Reference self}, Path=CardContent, Converter={StaticResource IsStringNullOrEmptyConverter}}" TextColor="DarkGray" />
 
-                        <Image Source="{Binding Source={x:Reference self}, Path=EditIcon}" Margin="20,0,0,0">
-                            <Image.IsVisible>
-                                <MultiBinding Converter="{StaticResource MultiValueMatchConverter}" ConverterParameter="True,False">
-                                    <Binding Source="{x:Reference self}" Path="ShowEditIcon" />
-                                    <Binding Source="{x:Reference self}" Path="ShowTitle" />
-                                </MultiBinding>
-                            </Image.IsVisible>
-                        </Image>
-                    </FlexLayout>
+                            <Image Source="{Binding Source={x:Reference self}, Path=EditIcon}" Margin="20,0,0,0">
+                                <Image.IsVisible>
+                                    <MultiBinding Converter="{StaticResource MultiValueMatchConverter}" ConverterParameter="True,False">
+                                        <Binding Source="{x:Reference self}" Path="ShowEditIcon" />
+                                        <Binding Source="{x:Reference self}" Path="ShowTitle" />
+                                    </MultiBinding>
+                                </Image.IsVisible>
+                            </Image>
+                        </FlexLayout>
+                        
+                        <ContentPresenter x:Name="ContentPlaceholder" />
+                    </VerticalStackLayout>
                 </Grid>
             </VerticalStackLayout>
         </Grid>

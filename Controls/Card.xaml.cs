@@ -37,6 +37,10 @@ public partial class Card : ContentView
         BindableProperty.Create(nameof(ShowTitle), typeof(bool), typeof(Card), true);
     public static readonly BindableProperty BorderRadiusProperty =
         BindableProperty.Create(nameof(BorderRadius), typeof(int), typeof(Card), 15);
+    public static readonly BindableProperty InnerContentProperty =
+        BindableProperty.Create(nameof(InnerContent), typeof(View), typeof(Card), propertyChanged: OnInnerContentChanged);
+    public static readonly BindableProperty ShowCardContentProperty =
+        BindableProperty.Create(nameof(ShowCardContent), typeof(bool), typeof(Card), true);
 
     public string Title
     {
@@ -118,10 +122,55 @@ public partial class Card : ContentView
         get => (bool)GetValue(ShowTitleProperty);
         set => SetValue(ShowTitleProperty, value);
     }
-
+    public View InnerContent
+    {
+        get => (View)GetValue(InnerContentProperty);
+        set => SetValue(InnerContentProperty, value);
+    }
+    public bool ShowCardContent
+    {
+        get => (bool)GetValue(ShowCardContentProperty);
+        set => SetValue(ShowCardContentProperty, value);
+    }
 
     public Card()
 	{
 		InitializeComponent();
-	}
+
+        BindingContextChanged += (s, e) =>
+        {
+            if (InnerContent != null)
+                InnerContent.BindingContext = BindingContext;
+        };
+    }
+    protected override void OnParentSet()
+    {
+        base.OnParentSet();
+
+        if (InnerContent != null)
+        {
+            InnerContent.BindingContext = BindingContext;
+        }
+    }
+    private static void OnInnerContentChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is Card card)
+        {
+            if (card.ContentPlaceholder == null)
+                return;
+
+            if (newValue is View newView)
+            {
+                card.ContentPlaceholder.Content = newView;
+
+                // Important: forward BindingContext
+                newView.BindingContext = card.BindingContext;
+            }
+            else
+            {
+                card.ContentPlaceholder.Content = null;
+            }
+        }
+    }
+
 }
