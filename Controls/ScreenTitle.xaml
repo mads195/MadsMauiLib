@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mads195.MadsMauiLib.Controls.ScreenTitle"
+             x:Name="self">
+    <Grid Padding="{Binding Source={x:Reference self}, Path=Padding}" BackgroundColor="{Binding Source={x:Reference self}, Path=BackgroundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding Source={x:Reference self}, Path=ImageColumnWidth}"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image
+            Grid.Column="0"
+            Source="{Binding Source={x:Reference self}, Path=ImageSource}"
+            Aspect="{Binding Source={x:Reference self}, Path=ImageAspect}"
+            HeightRequest="{Binding Source={x:Reference self}, Path=ImageHeight}"
+            WidthRequest="{Binding Source={x:Reference self}, Path=ImageWidth}"
+            HorizontalOptions="Start"/>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Text="{Binding Source={x:Reference self}, Path=Title}" 
+                TextColor="{Binding Source={x:Reference self}, Path=TitleTextColor}"
+                VerticalOptions="End"
+                VerticalTextAlignment="End"
+                BackgroundColor="Transparent" 
+                FontSize="{Binding Source={x:Reference self}, Path=TitleFontSize}"
+                FontAttributes="{Binding Source={x:Reference self}, Path=TitleFontAttributes}" />
+
+            <HorizontalStackLayout Grid.Row="1">
+                <Label
+                    Text="{Binding Source={x:Reference self}, Path=Byline}"
+                    TextColor="{Binding Source={x:Reference self}, Path=BylineTextColor}"
+                    VerticalOptions="Start" 
+                    VerticalTextAlignment="Start"
+                    BackgroundColor="Transparent" 
+                    FontSize="{Binding Source={x:Reference self}, Path=BylineFontSize}"
+                    FontAttributes="{Binding Source={x:Reference self}, Path=BylineFontAttributes}"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Grid>
+</ContentView>

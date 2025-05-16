@@ -1,4 +1,5 @@
 using Microsoft.Maui;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Mads195.MadsMauiLib.Controls;
@@ -41,6 +42,11 @@ public partial class Card : ContentView
         BindableProperty.Create(nameof(InnerContent), typeof(View), typeof(Card), propertyChanged: OnInnerContentChanged);
     public static readonly BindableProperty ShowCardContentProperty =
         BindableProperty.Create(nameof(ShowCardContent), typeof(bool), typeof(Card), true);
+    public static readonly BindableProperty UseAlternateBorderColorProperty =
+    BindableProperty.Create(nameof(UseAlternateBorderColor), typeof(bool), typeof(Card), false, propertyChanged: OnBorderColorTriggerChanged);
+    public static readonly BindableProperty AlternateBorderColorProperty =
+        BindableProperty.Create(nameof(AlternateBorderColor), typeof(Color), typeof(Card), Colors.Red, propertyChanged: OnBorderColorTriggerChanged);
+
 
     public string Title
     {
@@ -132,6 +138,16 @@ public partial class Card : ContentView
         get => (bool)GetValue(ShowCardContentProperty);
         set => SetValue(ShowCardContentProperty, value);
     }
+    public bool UseAlternateBorderColor
+    {
+        get => (bool)GetValue(UseAlternateBorderColorProperty);
+        set => SetValue(UseAlternateBorderColorProperty, value);
+    }
+    public Color AlternateBorderColor
+    {
+        get => (Color)GetValue(AlternateBorderColorProperty);
+        set => SetValue(AlternateBorderColorProperty, value);
+    }
 
     public Card()
 	{
@@ -143,6 +159,7 @@ public partial class Card : ContentView
                 InnerContent.BindingContext = BindingContext;
         };
     }
+
     protected override void OnParentSet()
     {
         base.OnParentSet();
@@ -172,5 +189,12 @@ public partial class Card : ContentView
             }
         }
     }
-
+    private static void OnBorderColorTriggerChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is Card card)
+        {
+            card.OnPropertyChanged(nameof(EffectiveBorderColor));
+        }
+    }
+    public Color EffectiveBorderColor => UseAlternateBorderColor ? AlternateBorderColor : BorderColor;
 }

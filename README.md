@@ -5,6 +5,8 @@
 # Mads195.MadsMauiLib
 MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of classes and functions that are useful for developing applications with the Maui Framework.
 ## New Features (May 2025)
+**Card**
+- Card is a control that can be used to display a title, text and inner content that can be child controls from the calling app.
 **DateTimePicker**
 - DateTimePicker is a simple select type picker control allowing the independent selection of hours and minutes.
 **DateTimeFormatConverter**
@@ -13,6 +15,8 @@ MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of c
 - MultiValueMatchConverter is a converter that takes multiple values and returns a boolean value. It is used to determine if each property matches a specific value.
 **TwoDigitConverter**
 - TwoDigitConverter is a converter that converts a number to a two digit string. It is used where a leading zero should be displayed such as an hour, minute, day or month value but that value is stored as an integer.
+**ScreenTitle**
+- ScreenTitle is a simple control that displays a title and an optional icon. The icon is displayed on the left and the title is displayed on the right. A bindable command can be used to execute a command when the icon or title is tapped.
 **General Updates**
 - Updated SQLite database library to use FileSystem.AppDataDirectory. Previously, Environment.SpecialFolder.LocalApplicationData was used but the final resolved path depended on the packaging model of the app that uses this package (TL;DR; Environment.SpecialFolder.LocalApplicationData behaves differently depending on release or debug). 
 
@@ -34,6 +38,15 @@ In your XAML file, add the namespace:
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              ...
              xmlns:madsmauilib="clr-namespace:Mads195.MadsMauiLib.Controls;assembly=MadsMauiLib"
+             ...>
+```
+
+For controls, add the namespace:
+```
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             ...
+             xmlns:mmlcontrols="clr-namespace:Mads195.MadsMauiLib.Controls;assembly=MadsMauiLib"
              ...>
 ```
 
@@ -86,18 +99,18 @@ var oValueZ = await this.popupService.ShowPopupAsync<Mads195.MadsMauiLib.ViewMod
 ```
 **Note:** Several internally used properties are exposed to allow for customization of the dialog. These properties are not intended to be used by the developer and are typically used for comparison and validation purposes within the control. The properties are: `password`, `confirmPassowrd`, `isCheckboxFieldChecked`, `textField`, `textConfirmValue`, `textConfirmValueRepeat`, `passwordValue`, `passwordValueRepeat` and `checkBoxValue`. These values should not be considered as permanent and may change in future releases.
 
-### SectionTitle
-Section title simply displays a consistently formatted title to use within a view.
+### Card
+Card is a control that can be used to display a title, text and inner content that can be child controls from the calling app.
 
 #### Usage
 ```
-<ContentPage ...
-             xmlns:mmlcontrols="clr-namespace:Mads195.MadsMauiLib.Controls;assembly=MadsMauiLib"
-             ...>
-```
-
-```
-<mmlcontrols:SectionTitle Text="Hello Mads195!" Padding="20,0,20,0" TextColor="Red" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" />
+<mmlcontrols:Card Title="Card" ShowEditIcon="False" ShowTitle="False" ShowCardContent="False" Command="{Binding MyUsefulCommand}" CommandParameter="SomeText" BorderColor="Black" WidthRequest="160" Margin="20,10,20,10">
+    <mmlcontrols:Card.InnerContent>
+        <StackLayout>
+            <Label Text="This is some content inside the card." />
+        </StackLayout>
+    </mmlcontrols:Card.InnerContent>
+</mmlcontrols:Card>
 ```
 
 ### LabelItem
@@ -105,13 +118,23 @@ Displays a label and a value. The label is on the left and the value is on the r
 
 #### Usage
 ```
-<ContentPage ...
-             xmlns:mmlcontrols="clr-namespace:Mads195.MadsMauiLib.Controls;assembly=MadsMauiLib"
-             ...>
+<mmlcontrols:LabelItem TextStart="Check Database" TextEnd="{Binding DatabaseCheck}" TapCommand="{Binding CheckDatabaseCommand}" Padding="0,10" />
 ```
 
+### SectionTitle
+Section title simply displays a consistently formatted title to use within a view.
+
+#### Usage
 ```
-<mmlcontrols:LabelItem TextStart="Check Database" TextEnd="{Binding DatabaseCheck}" TapCommand="{Binding CheckDatabaseCommand}" Padding="0,10" />
+<mmlcontrols:SectionTitle Text="Hello Mads195!" Padding="20,0,20,0" TextColor="Red" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" />
+```
+
+### ScreenTitle
+Displays a title and an optional icon. The icon is displayed on the left and the title is displayed on the right. A bindable command can be used to execute a command when the icon or title is tapped.
+
+#### Usage
+```
+<mmlcontrols:SectionTitle Title="Hello Mads195!" Byline="Welcome to the screen." />
 ```
 
 ## Converters
@@ -154,7 +177,7 @@ DateTimeFormatConverter is a converter that converts a datetime value to a forma
 ```
 
 ### MultiValueMatchConverter
-MultiValueMatchConverter is a converter that takes multiple values and returns a boolean value. It is used to determine if each property matches a specific value. In the following example, the image is only visible if the first binding is `True` and the second binding is `False`. The converter parameter is a comma separated list of values that are used to compare against the bindings. The first value in the list is compared against the first binding, the second value is compared against the second binding, and so on. If all values match, the converter returns `True`, otherwise it returns `False`.
+MultiValueMatchConverter is a converter that takes multiple values and returns a boolean value. It is used to determine if each property matches a specific value. In the following example, the image is only visible if the first binding is `True` and the second binding is `False`. The converter parameter is a comma separated list of values that are used to compare against the bindings. The first value in the list is compared against the first binding, the second value is compared against the second binding, and so on. If all values match, the converter returns `True`, otherwise it returns `False`. An empty string can be passed as one of the parameter values. This is useful when you want to check if a value is empty or not. The converter will return `True` if the value is empty and `False` if it is not.
 
 #### Usage
 ```

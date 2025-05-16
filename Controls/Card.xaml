@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <Border HorizontalOptions="Fill" StrokeThickness="{Binding Source={x:Reference self}, Path=BorderThickness}" Stroke="{Binding Source={x:Reference self}, Path=BorderColor}" WidthRequest="{Binding Source={x:Reference self}, Path=WidthRequest}">
+    <Border HorizontalOptions="Fill" StrokeThickness="{Binding Source={x:Reference self}, Path=BorderThickness}" Stroke="{Binding Source={x:Reference self}, Path=EffectiveBorderColor}" WidthRequest="{Binding Source={x:Reference self}, Path=WidthRequest}">
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="{Binding Source={x:Reference self}, Path=BorderRadius}" />
         </Border.StrokeShape>

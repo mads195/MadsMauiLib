@@ -20,9 +20,9 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.201</AssemblyVersion>
-		<FileVersion>1.0.201</FileVersion>
-		<Version>1.0.201</Version>
+		<AssemblyVersion>1.0.210</AssemblyVersion>
+		<FileVersion>1.0.210</FileVersion>
+		<Version>1.0.210</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
@@ -82,6 +82,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\OutlineButton.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\ScreenTitle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\SectionTitle.xaml">
