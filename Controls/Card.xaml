@@ -21,7 +21,12 @@
         </Border.StrokeShape>
 
         <Grid>
-            <Button Command="{Binding Source={x:Reference self}, Path=Command}" CommandParameter="{Binding Source={x:Reference self}, Path=CommandParameter}" BackgroundColor="Transparent" />
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1"
+                    CommandParameter="{Binding Source={x:Reference self}, Path=CommandParameter}"    
+                    Command="{Binding Source={x:Reference self}, Path=Command}" />
+            </Grid.GestureRecognizers>
+            <!--<Button Command="{Binding Source={x:Reference self}, Path=Command}" CommandParameter="{Binding Source={x:Reference self}, Path=CommandParameter}" BackgroundColor="Transparent" />-->
             <VerticalStackLayout BackgroundColor="{Binding Source={x:Reference self}, Path=TitleBackgroundColor}">
                 <FlexLayout JustifyContent="SpaceBetween" Padding="20,10" IsVisible="{Binding Source={x:Reference self}, Path=ShowTitle}">
                     <Label Text="{Binding Source={x:Reference self}, Path=Title}" FontAttributes="{Binding Source={x:Reference self}, Path=TitleFontAttributes}" TextColor="{Binding Source={x:Reference self}, Path=TitleTextColor}" />
