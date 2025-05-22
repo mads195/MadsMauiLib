@@ -17,6 +17,8 @@ MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of c
 - TwoDigitConverter is a converter that converts a number to a two digit string. It is used where a leading zero should be displayed such as an hour, minute, day or month value but that value is stored as an integer.
 **ScreenTitle**
 - ScreenTitle is a simple control that displays a title and an optional icon. The icon is displayed on the left and the title is displayed on the right. A bindable command can be used to execute a command when the icon or title is tapped.
+**SolidButton**
+- SolidButton is a simple button control that can be used to display a title and an optional icon. A bindable command can be used to execute a command when the button is tapped.
 **General Updates**
 - Updated SQLite database library to use FileSystem.AppDataDirectory. Previously, Environment.SpecialFolder.LocalApplicationData was used but the final resolved path depended on the packaging model of the app that uses this package (TL;DR; Environment.SpecialFolder.LocalApplicationData behaves differently depending on release or debug). 
 
@@ -118,7 +120,11 @@ Displays a label and a value. The label is on the left and the value is on the r
 
 #### Usage
 ```
-<mmlcontrols:LabelItem TextStart="Check Database" TextEnd="{Binding DatabaseCheck}" TapCommand="{Binding CheckDatabaseCommand}" Padding="0,10" />
+<mmlcontrols:LabelItem 
+TextStart="Check Database" 
+TextEnd="{Binding MyCommandResult}" 
+TapCommand="{Binding MyUsefulCommand}" 
+Padding="0,10" />
 ```
 
 ### SectionTitle
@@ -126,7 +132,27 @@ Section title simply displays a consistently formatted title to use within a vie
 
 #### Usage
 ```
-<mmlcontrols:SectionTitle Text="Hello Mads195!" Padding="20,0,20,0" TextColor="Red" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" />
+<mmlcontrols:SectionTitle 
+    Text="Hello Mads195!" 
+    Padding="20,0,20,0" 
+    TextColor="Red" 
+    HorizontalTextAlignment="Start" 
+    HorizontalOptions="FillAndExpand" />
+```
+
+### SolidButton
+SolidButton is a simple button control that can be used to display a title and an optional icon. A bindable command can be used to execute a command when the button is tapped.
+
+#### Usage
+```
+<mmlcontrols:SolidButton 
+    Text="Hello Mads195!" 
+    ImageSource="icon.png" 
+    Command="{Binding MyUsefulCommand}" 
+    CommandParameter="SomeText" 
+    BackgroundColor="Red" 
+    TextColor="White" 
+    MaximumWidthRequest="100" />
 ```
 
 ### ScreenTitle
@@ -134,7 +160,22 @@ Displays a title and an optional icon. The icon is displayed on the left and the
 
 #### Usage
 ```
-<mmlcontrols:SectionTitle Title="Hello Mads195!" Byline="Welcome to the screen." />
+<mmlcontrols:ScreenTitle 
+    Title="Hello Mads195!" 
+    Byline="Welcome to the screen."
+    TitleTextColor="Black"
+    TitleFontSize="24"
+    TitleFontAttributes="Bold"
+    BylineTextColor="Gray"
+    BylineFontSize="16"
+    BylineFontAttributes="None"
+    ImageSource="icon.png"
+    ImageAspect="AspectFit"
+    ImageHeight="40"
+    ImageWidth="40"
+    ImageColumnWidth="Auto"
+    Padding="10"
+    BackgroundColor="White" />
 ```
 
 ## Converters
