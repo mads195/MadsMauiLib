@@ -28,12 +28,14 @@ public partial class SolidButton : ContentView
         BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(SolidButton), Color.FromArgb("#000000"));
 
     public static readonly BindableProperty BackgroundColorProperty =
-        BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(SolidButton), Color.FromArgb("#000000"));
+        BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(SolidButton), Color.FromArgb("#ffffff"));
+
+    public static readonly BindableProperty TextColorProperty =
+        BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(SolidButton), Color.FromArgb("#000000"));
 
     public static readonly BindableProperty ImageSourceProperty =
         BindableProperty.Create(nameof(ImageSource), typeof(string), typeof(SolidButton));
-    public static readonly BindableProperty TextProperty =
-        BindableProperty.Create(nameof(Text), typeof(string), typeof(SolidButton));
+
     public static readonly BindableProperty CommandProperty =
         BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(SolidButton));
 
@@ -47,6 +49,12 @@ public partial class SolidButton : ContentView
     public static readonly BindableProperty WidthRequestProperty =
         BindableProperty.Create(nameof(WidthRequest), typeof(double), typeof(SolidButton), -1.0,
             propertyChanged: OnButtonShapeChanged);
+
+    public static readonly BindableProperty TextProperty =
+        BindableProperty.Create(nameof(Text), typeof(string), typeof(SolidButton));
+
+    public static readonly BindableProperty FontAttributesProperty =
+        BindableProperty.Create(nameof(FontAttributes), typeof(FontAttributes), typeof(SolidButton), FontAttributes.Bold);
 
     /**
      * In-ward Properties
@@ -80,17 +88,17 @@ public partial class SolidButton : ContentView
         get => (Color)GetValue(BackgroundColorProperty);
         set => SetValue(BackgroundColorProperty, value);
     }
-
+    public Color TextColor
+    {
+        get => (Color)GetValue(TextColorProperty);
+        set => SetValue(TextColorProperty, value);
+    }
     public string ImageSource
     {
         get => (string)GetValue(ImageSourceProperty);
         set => SetValue(ImageSourceProperty, value);
     }
-    public string Text
-    {
-        get => (string)GetValue(TextProperty);
-        set => SetValue(TextProperty, value);
-    }
+
     public ICommand Command
     {
         get => (ICommand)GetValue(CommandProperty);
@@ -114,6 +122,16 @@ public partial class SolidButton : ContentView
         get => (double)GetValue(WidthRequestProperty);
         set => SetValue(WidthRequestProperty, value);
     }
+    public string Text
+    {
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
+    public FontAttributes FontAttributes
+    {
+        get => (FontAttributes)GetValue(FontAttributesProperty);
+        set => SetValue(FontAttributesProperty, value);
+    }
 
     public SolidButton()
     {
@@ -128,10 +146,12 @@ public partial class SolidButton : ContentView
         switch (button.ButtonShape)
         {
             case ButtonShapeType.Rectangular:
+                // CornerRadius remains the user-defined bound value
                 button.HeightRequest = -1;
                 break;
             case ButtonShapeType.Square:
                 button.HeightRequest = button.WidthRequest;
+                button.CornerRadius = 0;
                 break;
             case ButtonShapeType.Circle:
                 button.HeightRequest = button.WidthRequest;

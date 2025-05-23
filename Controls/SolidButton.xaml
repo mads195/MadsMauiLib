@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mads195.MadsMauiLib.Controls.SolidButton"         
+             x:Class="Mads195.MadsMauiLib.Controls.SolidButton"
              x:Name="self">
-    <Border StrokeThickness="{Binding Source={x:Reference self}, Path=StrokeThickness}" Stroke="{Binding Source={x:Reference self}, Path=StrokeColor}" MaximumWidthRequest="{Binding Source={x:Reference self}, Path=MaximumWidthRequest}" BackgroundColor="{Binding Source={x:Reference self}, Path=BackgroundColor}">
-        <Border.StrokeShape>
-            <RoundRectangle CornerRadius="{Binding Source={x:Reference self}, Path=CornerRadius}" />
-        </Border.StrokeShape>
-        <Button 
-            WidthRequest="{Binding Source={x:Reference self}, Path=MaximumWidthRequest}"
-            ImageSource="{Binding Source={x:Reference self}, Path=ImageSource}" 
-            Command="{Binding Source={x:Reference self}, Path=Command}" 
-            CommandParameter="{Binding Source={x:Reference self}, Path=CommandParameter}" 
-            BackgroundColor="Transparent"
-            Text="{Binding Source={x:Reference self}, Path=Text}"/>
-    </Border>
+    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto">
+        <Button
+            Grid.ColumnSpan="2"
+            BackgroundColor="{Binding Source={x:Reference self}, Path=BackgroundColor}"
+            Command="{Binding Source={x:Reference self}, Path=Command}"
+            CommandParameter="{Binding Source={x:Reference self}, Path=CommandParameter}"
+            CornerRadius="{Binding Source={x:Reference self}, Path=CornerRadius}"
+            WidthRequest="{Binding Source={x:Reference self}, Path=WidthRequest}"
+            HeightRequest="{Binding Source={x:Reference self}, Path=HeightRequest}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Text="{Binding Source={x:Reference self}, Path=Text}" 
+            TextColor="{Binding Source={x:Reference self}, Path=TextColor}" 
+            FontAttributes="{Binding Source={x:Reference self}, Path=FontAttributes}"/>
+    </Grid>
 </ContentView>
