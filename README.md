@@ -4,7 +4,11 @@
 
 # Mads195.MadsMauiLib
 MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of classes and functions that are useful for developing applications with the Maui Framework.
-## New Features (May 2025)
+## New Features (June 2025)
+**LabelItem**
+- Label item is a control that displays a label and a value. The label is on the left and the value is on the right. The label can be a string or a bindable property. A bindable command can be used to execute a command when the label is tapped. TextEndDisplayStyle can be set between Text or Badge where Badge can be used to display a count such as notifications.
+
+## Features
 **Card**
 - Card is a control that can be used to display a title, text and inner content that can be child controls from the calling app.
 **DateTimePicker**

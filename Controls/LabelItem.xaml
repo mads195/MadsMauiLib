@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:Mads195.MadsMauiLib.Controls"
+             xmlns:vm="clr-namespace:Mads195.MadsMauiLib.ViewModels.Controls"
              x:Class="Mads195.MadsMauiLib.Controls.LabelItem"
              x:Name="self">
-    <Grid>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+            <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="IsStringNotNullOrWhiteSpaceConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <Grid BackgroundColor="{Binding Source={x:Reference self}, Path=BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
@@ -16,17 +27,45 @@
                VerticalOptions="Center" 
                BackgroundColor="Transparent" 
                Grid.Column="0" 
-               TextColor="{Binding Source={x:Reference self}, Path=TextStartColor}" />
-        <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent" Spacing="10">
+               TextColor="{Binding Source={x:Reference self}, Path=TextStartColor}"
+               FontAttributes="{Binding Source={x:Reference self}, Path=TextStartFontAttributes}"
+               Padding="{Binding Source={x:Reference self}, Path=InternalPaddingStart}" />
+        <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent" Spacing="10" Padding="{Binding Source={x:Reference self}, Path=InternalPaddingEnd}">
             <Label x:Name="EndLabel" 
                    Text="{Binding Source={x:Reference self}, Path=TextEnd}" 
                    HorizontalTextAlignment="End"
-                   TextColor="{Binding Source={x:Reference self}, Path=TextEndColor}"/>
+                   TextColor="{Binding Source={x:Reference self}, Path=TextEndColor}"
+                   FontAttributes="{Binding Source={x:Reference self}, Path=TextEndFontAttributes}"
+                   IsVisible="{Binding Source={x:Reference self}, Path=TextEndDisplayStyle, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static controls:DisplayStyle.Text}}"/>
+
             <Image 
                 Source="{Binding Source={x:Reference self}, Path=IconSource}" 
                 HeightRequest="{Binding Source={x:Reference self}, Path=IconHeight}" 
                 WidthRequest="{Binding Source={x:Reference self}, Path=IconWidth}" 
-                HorizontalOptions="End" />
+                HorizontalOptions="End"
+                IsVisible="{Binding IconSource, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}"/>
+
+            <Border Grid.Column="1"
+                    MinimumWidthRequest="24"
+                    MinimumHeightRequest="24"
+                    StrokeThickness="0"
+                    BackgroundColor="{Binding Source={x:Reference self}, Path=HighlightColor}" 
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Padding="{Binding Source={x:Reference self}, Path=BadgePadding}"
+                    StrokeShape="RoundRectangle 12"
+                    IsVisible="{Binding Source={x:Reference self}, Path=TextEndDisplayStyle, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static controls:DisplayStyle.Badge}}">
+
+                <Label x:Name="EndLabelBadge" 
+                    Text="{Binding Source={x:Reference self}, Path=TextEnd}" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    TextColor="{Binding Source={x:Reference self}, Path=TextEndColor}" 
+                    FontAttributes="{Binding Source={x:Reference self}, Path=TextEndFontAttributes}"/>
+
+            </Border>
         </HorizontalStackLayout>
     </Grid>
 </ContentView>

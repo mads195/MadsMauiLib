@@ -4,7 +4,11 @@ using System.Windows.Input;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Mads195.MadsMauiLib.Controls;
-
+public enum DisplayStyle
+{
+    Text,
+    Badge
+}
 public partial class LabelItem : ContentView
 {
     public static readonly BindableProperty TextStartProperty =
@@ -17,6 +21,9 @@ public partial class LabelItem : ContentView
     public static readonly BindableProperty TextEndColorProperty =
         BindableProperty.Create(nameof(TextEndColor), typeof(Color), typeof(LabelItem), Color.FromArgb("#000000"));
 
+    public static readonly BindableProperty BackgroundColorProperty =
+        BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(LabelItem), Color.FromArgb("#ffffff"));
+
     public static readonly BindableProperty TapCommandProperty =
         BindableProperty.Create(nameof(TapCommand), typeof(ICommand), typeof(LabelItem));
 
@@ -28,6 +35,40 @@ public partial class LabelItem : ContentView
 
     public static readonly BindableProperty IconWidthProperty =
         BindableProperty.Create(nameof(IconWidth), typeof(int), typeof(LabelItem), 16);
+
+    public static readonly BindableProperty TextStartFontAttributesProperty =
+        BindableProperty.Create(nameof(TextStartFontAttributes), typeof(FontAttributes), typeof(LabelItem), FontAttributes.Bold);
+
+    public static readonly BindableProperty TextEndFontAttributesProperty =
+        BindableProperty.Create(nameof(TextEndFontAttributes), typeof(FontAttributes), typeof(LabelItem), FontAttributes.Bold);
+
+    public static readonly BindableProperty TextEndDisplayStyleProperty =
+        BindableProperty.Create(nameof(TextEndDisplayStyle), typeof(DisplayStyle), typeof(LabelItem), DisplayStyle.Text,
+            propertyChanged: OnTextEndDisplayStyleChanged);
+
+    public static readonly BindableProperty HighlightColorProperty =
+        BindableProperty.Create(nameof(HighlightColor), typeof(Color), typeof(LabelItem), Color.FromArgb("#cccccc"));
+
+    public static readonly BindableProperty InternalPaddingStartProperty =
+    BindableProperty.Create(
+        nameof(InternalPaddingStart),
+        typeof(Thickness),
+        typeof(ScreenTitle),
+        new Thickness(10, 10, 10, 10));
+
+    public static readonly BindableProperty InternalPaddingEndProperty =
+    BindableProperty.Create(
+        nameof(InternalPaddingEnd),
+        typeof(Thickness),
+        typeof(ScreenTitle),
+        new Thickness(10, 10, 10, 10));
+
+    public static readonly BindableProperty BadgePaddingProperty =
+    BindableProperty.Create(
+        nameof(BadgePadding),
+        typeof(Thickness),
+        typeof(ScreenTitle),
+        new Thickness(2, 2, 2, 2));
 
     public string TextStart
     {
@@ -49,6 +90,11 @@ public partial class LabelItem : ContentView
         get => (Color)GetValue(TextEndColorProperty);
         set => SetValue(TextEndColorProperty, value);
     }
+    public Color BackgroundColor
+    {
+        get => (Color)GetValue(BackgroundColorProperty);
+        set => SetValue(BackgroundColorProperty, value);
+    }
     public ICommand TapCommand
     {
         get => (ICommand)GetValue(TapCommandProperty);
@@ -69,8 +115,59 @@ public partial class LabelItem : ContentView
         get => (int)GetValue(IconWidthProperty);
         set => SetValue(IconWidthProperty, value);
     }
+    public FontAttributes TextStartFontAttributes
+    {
+        get => (FontAttributes)GetValue(TextStartFontAttributesProperty);
+        set => SetValue(TextStartFontAttributesProperty, value);
+    }
+    public FontAttributes TextEndFontAttributes
+    {
+        get => (FontAttributes)GetValue(TextEndFontAttributesProperty);
+        set => SetValue(TextEndFontAttributesProperty, value);
+    }
+    public DisplayStyle TextEndDisplayStyle
+    {
+        get => (DisplayStyle)GetValue(TextEndDisplayStyleProperty);
+        set => SetValue(TextEndDisplayStyleProperty, value);
+    }
+    public Color HighlightColor
+    {
+        get => (Color)GetValue(HighlightColorProperty);
+        set => SetValue(HighlightColorProperty, value);
+    }
+    public Thickness InternalPaddingStart
+    {
+        get => (Thickness)GetValue(InternalPaddingStartProperty);
+        set => SetValue(InternalPaddingStartProperty, value);
+    }
+    public Thickness InternalPaddingEnd
+    {
+        get => (Thickness)GetValue(InternalPaddingEndProperty);
+        set => SetValue(InternalPaddingEndProperty, value);
+    }
+    public Thickness BadgePadding
+    {
+        get => (Thickness)GetValue(BadgePaddingProperty);
+        set => SetValue(BadgePaddingProperty, value);
+    }
     public LabelItem()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
+    }
+    
+    private static void OnTextEndDisplayStyleChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is not LabelItem labelItem)
+            return;
+
+        switch (labelItem.TextEndDisplayStyle)
+        {
+            case DisplayStyle.Text:
+                //
+                break;
+            case DisplayStyle.Badge:
+                //
+                break;
+        }
     }
 }
