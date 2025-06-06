@@ -5,26 +5,45 @@
 # Mads195.MadsMauiLib
 MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of classes and functions that are useful for developing applications with the Maui Framework.
 ## New Features (June 2025)
+**FlexiDialog**
+- FlexiDialog has been updated to include an IndeterminateTransfer dialog type. This uses the TransferProgressIndicator control to give a visual indication that something is happening between A and B.
+
+**IndeterminateProgressBar**
+- A control that shows a continuously travelling indicator (image or solid colour) moving from left-to-right to indicate that activity is happening.
+
 **LabelItem**
 - Label item is a control that displays a label and a value. The label is on the left and the value is on the right. The label can be a string or a bindable property. A bindable command can be used to execute a command when the label is tapped. TextEndDisplayStyle can be set between Text or Badge where Badge can be used to display a count such as notifications.
+
+**TransferProgressIndicator**
+- A control that gives a visual indication that something is being transferred from one point to another. E.g. a file upload. Left and right images can be specified.
 
 ## Features
 **Card**
 - Card is a control that can be used to display a title, text and inner content that can be child controls from the calling app.
+
 **DateTimePicker**
 - DateTimePicker is a simple select type picker control allowing the independent selection of hours and minutes.
+
 **DateTimeFormatConverter**
 - The DateTimeFormatConverter is a converter that converts a datetime value to a formatted string. Any valid C# datetime format can be specified as the parameter.
+
+**IndeterminateProgressBar**
+- A control that shows a continuously travelling indicator (image or solid colour) moving from left-to-right to indicate that activity is happening.
+
 **MultiValueMatchConverter**
 - MultiValueMatchConverter is a converter that takes multiple values and returns a boolean value. It is used to determine if each property matches a specific value.
+
 **TwoDigitConverter**
 - TwoDigitConverter is a converter that converts a number to a two digit string. It is used where a leading zero should be displayed such as an hour, minute, day or month value but that value is stored as an integer.
+
 **ScreenTitle**
 - ScreenTitle is a simple control that displays a title and an optional icon. The icon is displayed on the left and the title is displayed on the right. A bindable command can be used to execute a command when the icon or title is tapped.
+
 **SolidButton**
 - SolidButton is a simple button control that can be used to display a title and an optional icon. A bindable command can be used to execute a command when the button is tapped.
-**General Updates**
-- Updated SQLite database library to use FileSystem.AppDataDirectory. Previously, Environment.SpecialFolder.LocalApplicationData was used but the final resolved path depended on the packaging model of the app that uses this package (TL;DR; Environment.SpecialFolder.LocalApplicationData behaves differently depending on release or debug). 
+
+**TransferProgressIndicator**
+- A control that gives a visual indication that something is being transferred from one point to another. E.g. a file upload. Left and right images can be specified.
 
 ## Getting Started
 MadsMauiLib can be installed via Nuget. Recommend that MauiCommunityToolkit is also installed. Once installed, register the package in your MauiProgram.cs file:
@@ -119,6 +138,21 @@ Card is a control that can be used to display a title, text and inner content th
 </mmlcontrols:Card>
 ```
 
+### IndeterminateProgressBar
+IndeterminateProgress is a control that shows a continuously travelling indicator (image or solid colour) moving from left-to-right to indicate that activity is happening.
+
+#### Usage
+```
+<mmlcontrols:IndeterminateProgressBar
+    BackgroundColor="#eeeeee"
+    IndicatorColor="#2196F3"
+    HeightRequest="20"
+    IndicatorWidth="120"
+    StrokeShape="{RoundRectangle CornerRadius='8'}"
+    IndicatorImage="mml_chevron_right.png"
+    ProgressSpeed="Fast" />
+```
+
 ### LabelItem
 Displays a label and a value. The label is on the left and the value is on the right. The label can be a string or a bindable property. A bindable command can be used to execute a command when the label is tapped.
 
@@ -180,6 +214,18 @@ Displays a title and an optional icon. The icon is displayed on the left and the
     ImageColumnWidth="Auto"
     Padding="10"
     BackgroundColor="White" />
+```
+
+## TransferProgressIndicator
+A control that gives a visual indication that something is being transferred from one point to another. E.g. a file upload. Left and right images can be specified.
+
+#### Usage
+```
+<mmlcontrols:TransferProgressIndicator 
+    TransferImageL="mml_box.png"
+    TransferImageR="mml_box_fill.png"
+    TransferBarHeight="30"
+    TransferImageWidth="30" />
 ```
 
 ## Converters

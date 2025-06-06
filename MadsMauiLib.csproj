@@ -20,9 +20,9 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.240</AssemblyVersion>
-		<FileVersion>1.0.240</FileVersion>
-		<Version>1.0.240</Version>
+		<AssemblyVersion>1.0.280</AssemblyVersion>
+		<FileVersion>1.0.280</FileVersion>
+		<Version>1.0.280</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
@@ -61,13 +61,24 @@
 
 	<ItemGroup>
 	  <Folder Include="Views\" />
+    
 	  <MauiImage Include="Resources\Images\mml_caret_down.svg" />
 	  <MauiImage Include="Resources\Images\mml_caret_down_fill.svg" />
+    <MauiImage Include="Resources\Images\mml_caret_left.svg" />
+    <MauiImage Include="Resources\Images\mml_caret_left_fill.svg" />
+    <MauiImage Include="Resources\Images\mml_caret_right.svg" />
+    <MauiImage Include="Resources\Images\mml_caret_right_fill.svg" />
 	  <MauiImage Include="Resources\Images\mml_caret_up.svg" />
 	  <MauiImage Include="Resources\Images\mml_caret_up_fill.svg" />
+    <MauiImage Include="Resources\Images\mml_chevron_down.svg" />
+    <MauiImage Include="Resources\Images\mml_chevron_left.svg" />
+    <MauiImage Include="Resources\Images\mml_chevron_right.svg" />
+    <MauiImage Include="Resources\Images\mml_chevron_up.svg" />
 	  <MauiImage Include="Resources\Images\mml_pencil_square.svg" />
 	  <MauiImage Include="Resources\Images\mml_slash.svg" />
 	  <MauiImage Include="Resources\Images\mml_two_dots_vertical.svg" />
+    <MauiImage Include="Resources\Images\mml_box.svg" />
+    <MauiImage Include="Resources\Images\mml_box_fill.svg" />
 	  <None Include="README.md" Pack="true" PackagePath="\" />
 	  <None Include="LICENSE.TXT" Pack="true" PackagePath="\" />
     <None Include="mml_stripes_base_128px.png" Pack="true" PackagePath="\" />
@@ -84,6 +95,9 @@
 	  <MauiXaml Update="Controls\FlexiDialog.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\IndeterminateProgressBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\OutlineButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -94,6 +108,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\SolidButton.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\TransferProgressIndicator.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

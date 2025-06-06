@@ -59,6 +59,15 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         int selectedMonth = DateTime.Now.Month;
         [ObservableProperty]
         int selectedYear = DateTime.Now.Year % 100;
+        [ObservableProperty]
+        string indeterminateTransferImageL = "mml_box.png";
+        [ObservableProperty]
+        string indeterminateTransferImageR = "mml_box_fill.png";
+        [ObservableProperty]
+        int indeterminateTransferImageWidth = 30;
+        [ObservableProperty]
+        int indeterminateTransferBarHeight = 30;
+
         /**
          * Bindable Properties - Private
          */
@@ -84,6 +93,7 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         public ObservableCollection<int> Hours { get; } = new ObservableCollection<int>(Enumerable.Range(0, 24));
         public ObservableCollection<int> Minutes { get; } = new ObservableCollection<int>(Enumerable.Range(0, 60));
 
+        private readonly SemaphoreSlim semaphoneSlimUpdateMessage = new(1, 1);
         internal readonly IPopupService popupService;
         public FlexiDialogViewModel(IPopupService popupService)
         {
@@ -369,6 +379,22 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
             if (SelectedDay > maxDay)
                 SelectedDay = maxDay;
         }
+
+        public async void UpdateMessage(int iDelayInMs, string vMessage)
+        {
+            await semaphoneSlimUpdateMessage.WaitAsync();
+            try
+            {
+                if (iDelayInMs > 0)
+                await Task.Delay(iDelayInMs);
+
+                Message = vMessage;
+            }
+            finally
+            {
+                semaphoneSlimUpdateMessage.Release();
+            }
+        }
     }
 
     public enum FlexiDialogType
@@ -378,7 +404,8 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         ConfirmField,
         InfoList,
         SingleCheckbox,
-        DateTimePicker
+        DateTimePicker,
+        IndeterminateTransfer
     }
 
     public enum FlexiDialogButton

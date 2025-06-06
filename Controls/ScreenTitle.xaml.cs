@@ -31,15 +31,29 @@ public partial class ScreenTitle : ContentView
         BindableProperty.Create(nameof(BylineFontAttributes), typeof(FontAttributes), typeof(ScreenTitle), FontAttributes.Bold);
     public static readonly BindableProperty ImageCommandProperty =
         BindableProperty.Create(nameof(ImageCommand), typeof(ICommand), typeof(ScreenTitle));
+    public static readonly BindableProperty ImageCommandParameterProperty =
+        BindableProperty.Create(nameof(ImageCommandParameter), typeof(string), typeof(ScreenTitle), string.Empty);
     public static readonly BindableProperty TitleCommandProperty =
         BindableProperty.Create(nameof(TitleCommand), typeof(ICommand), typeof(ScreenTitle));
+    public static readonly BindableProperty TitleCommandParameterProperty =
+        BindableProperty.Create(nameof(TitleCommandParameter), typeof(string), typeof(ScreenTitle), string.Empty);
     public static readonly BindableProperty ImageColumnWidthProperty =
         BindableProperty.Create(nameof(ImageColumnWidth), typeof(int), typeof(ScreenTitle), 60);
     public static readonly BindableProperty PaddingProperty =
         BindableProperty.Create(nameof(Padding), typeof(Thickness), typeof(ScreenTitle), new Thickness(20, 20));
     public static readonly BindableProperty BackgroundColorProperty =
         BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(ScreenTitle), Color.FromArgb("#ffffff"));
-    
+    public static readonly BindableProperty EndImageSourceProperty =
+        BindableProperty.Create(nameof(EndImageSource), typeof(string), typeof(ScreenTitle), "mml_chevron_right.png");
+    public static readonly BindableProperty EndImageCommandProperty =
+        BindableProperty.Create(nameof(EndImageCommand), typeof(ICommand), typeof(ScreenTitle));
+    public static readonly BindableProperty EndImageCommandParameterProperty =
+        BindableProperty.Create(nameof(EndImageCommandParameter), typeof(string), typeof(ScreenTitle), string.Empty);
+    public static readonly BindableProperty EndImageWidthProperty =
+        BindableProperty.Create(nameof(EndImageWidth), typeof(int), typeof(ScreenTitle), 24);
+    public static readonly BindableProperty EndImageHeightProperty =
+        BindableProperty.Create(nameof(EndImageHeight), typeof(int), typeof(ScreenTitle), 24);
+
     public string Title
     {
         get => (string)GetValue(TitleProperty);
@@ -105,10 +119,20 @@ public partial class ScreenTitle : ContentView
         get => (ICommand)GetValue(ImageCommandProperty);
         set => SetValue(ImageCommandProperty, value);
     }
+    public string ImageCommandParameter
+    {
+        get => (string)GetValue(ImageCommandParameterProperty);
+        set => SetValue(ImageCommandParameterProperty, value);
+    }
     public ICommand TitleCommand
     {
         get => (ICommand)GetValue(TitleCommandProperty);
         set => SetValue(TitleCommandProperty, value);
+    }
+    public string TitleCommandParameter
+    {
+        get => (string)GetValue(TitleCommandParameterProperty);
+        set => SetValue(TitleCommandParameterProperty, value);
     }
     public int ImageColumnWidth
     {
@@ -124,6 +148,31 @@ public partial class ScreenTitle : ContentView
     {
         get => (Color)GetValue(BackgroundColorProperty);
         set => SetValue(BackgroundColorProperty, value);
+    }
+    public string EndImageSource
+    {
+        get => (string)GetValue(EndImageSourceProperty);
+        set => SetValue(EndImageSourceProperty, value);
+    }
+    public ICommand EndImageCommand
+    {
+        get => (ICommand)GetValue(EndImageCommandProperty);
+        set => SetValue(EndImageCommandProperty, value);
+    }
+    public string EndImageCommandParameter
+    {
+        get => (string)GetValue(EndImageCommandParameterProperty);
+        set => SetValue(EndImageCommandParameterProperty, value);
+    }
+    public int EndImageWidth
+    {
+        get => (int)GetValue(EndImageWidthProperty);
+        set => SetValue(EndImageWidthProperty, value);
+    }
+    public int EndImageHeight
+    {
+        get => (int)GetValue(EndImageHeightProperty);
+        set => SetValue(EndImageHeightProperty, value);
     }
     public ScreenTitle()
 	{

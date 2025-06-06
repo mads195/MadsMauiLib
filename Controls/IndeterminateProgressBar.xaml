@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Mads195.MadsMauiLib.Controls.IndeterminateProgressBar"
+             x:Name="self">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotEqualConverter x:Key="IsNotEqualConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Border x:Name="ProgressBarContainer"
+            BackgroundColor="{Binding Source={x:Reference self}, Path=BackgroundColor}"
+        StrokeThickness="0"
+        StrokeShape="{Binding Source={x:Reference self}, Path=StrokeShape}"
+        HeightRequest="{Binding Source={x:Reference self}, Path=HeightRequest}"
+        HorizontalOptions="Fill">
+        <Border x:Name="ProgressBarIndicator"
+            BackgroundColor="{Binding Source={x:Reference self}, Path=IndicatorColor}"
+            StrokeThickness="0"
+            StrokeShape="{Binding Source={x:Reference self}, Path=StrokeShape}"
+            HeightRequest="{Binding Source={x:Reference self}, Path=HeightRequest}"
+            WidthRequest="{Binding Source={x:Reference self}, Path=IndicatorWidth}"
+            HorizontalOptions="Start"
+            VerticalOptions="Center">
+            <Image 
+                Source="{Binding Source={x:Reference self}, Path=IndicatorImage}" 
+                IsVisible="{Binding Source={x:Reference self}, Path=IndicatorImage, Converter={StaticResource IsNotEqualConverter}, ConverterParameter=''}" />
+        </Border>
+    </Border>
+</ContentView>

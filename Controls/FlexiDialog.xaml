@@ -2,7 +2,7 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:popups="clr-namespace:Mads195.MadsMauiLib.Controls"
+             xmlns:mmlcontrols="clr-namespace:Mads195.MadsMauiLib.Controls"
              xmlns:vm="clr-namespace:Mads195.MadsMauiLib.ViewModels.Controls"
              xmlns:mmlconverters="clr-namespace:Mads195.MadsMauiLib.Converters"
              x:Name="this"
@@ -10,7 +10,7 @@
              x:Class="Mads195.MadsMauiLib.Controls.FlexiDialog">
 
     <toolkit:Popup.Resources>
-        <Style TargetType="{x:Type popups:FlexiDialog}">
+        <Style TargetType="{x:Type mmlcontrols:FlexiDialog}">
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="VerticalOptions" Value="Start" />
             <Setter Property="CanBeDismissedByTappingOutsideOfPopup" Value="True" />
@@ -31,7 +31,7 @@
             <Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" x:Name="MyTitle" />
             <Label Text="{Binding Message}" FontAttributes="Bold" IsVisible="{Binding Message, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
             <Label Text="{Binding HeroMessage}" FontSize="{Binding HeroFontSize}" Padding="0,10" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontAttributes="Bold" IsVisible="{Binding HeroMessage, Converter={StaticResource IsStringNotNullOrEmptyConverter}}" />
-            <Label Text="{Binding ShareLabel}" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center" IsVisible="{Binding Message, Converter={StaticResource IsStringNotNullOrEmptyConverter}}">
+            <Label Text="{Binding ShareLabel}" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center" IsVisible="{Binding ShareLabel, Converter={StaticResource IsStringNotNullOrEmptyConverter}}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ShareCommand}" />
                 </Label.GestureRecognizers>
@@ -111,7 +111,7 @@
             <!-- Date Selector -->
             <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.DateTimePicker}}">
                 <VerticalStackLayout>
-                    <popups:SectionTitle Text="Date" FontAttributes="Bold" />
+                    <mmlcontrols:SectionTitle Text="Date" FontAttributes="Bold" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40" />
@@ -126,7 +126,7 @@
                         <Grid Grid.Column="1">
                             <FlexLayout JustifyContent="SpaceBetween">
                                 <VerticalStackLayout VerticalOptions="Center">
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -138,7 +138,7 @@
 
                                     <Entry Text="{Binding SelectedDay, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
 
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -152,7 +152,7 @@
                                     <Image Source="mml_slash.png" />
                                 </VerticalStackLayout>
                                 <VerticalStackLayout VerticalOptions="Center">
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -164,7 +164,7 @@
 
                                     <Entry Text="{Binding SelectedMonth, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
 
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -178,7 +178,7 @@
                                     <Image Source="mml_slash.png" />
                                 </VerticalStackLayout>
                                 <VerticalStackLayout VerticalOptions="Center">
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -188,7 +188,7 @@
                                         Command="{Binding DateTimeChangeCommand}"
                                         CommandParameter="YearIncrease"/>
                                     <Entry Text="{Binding SelectedYear}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -211,7 +211,7 @@
             <!-- Time Selector -->
             <Grid IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.DateTimePicker}}">
                 <VerticalStackLayout>
-                    <popups:SectionTitle Text="Time" FontAttributes="Bold" />
+                    <mmlcontrols:SectionTitle Text="Time" FontAttributes="Bold" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80" />
@@ -226,7 +226,7 @@
                         <Grid Grid.Column="1">
                             <FlexLayout JustifyContent="SpaceBetween">
                                 <VerticalStackLayout VerticalOptions="Center">
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -236,7 +236,7 @@
                                         Command="{Binding DateTimeChangeCommand}"
                                         CommandParameter="HourIncrease"/>
                                     <Entry Text="{Binding SelectedHour, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -250,7 +250,7 @@
                                     <Image Source="mml_two_dots_vertical.png" />
                                 </VerticalStackLayout>
                                 <VerticalStackLayout VerticalOptions="Center">
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -260,7 +260,7 @@
                                         Command="{Binding DateTimeChangeCommand}"
                                         CommandParameter="MinuteIncrease"/>
                                     <Entry Text="{Binding SelectedMinute, Converter={StaticResource TwoDigitConverter}}" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" />
-                                    <popups:OutlineButton 
+                                    <mmlcontrols:OutlineButton 
                                         BackgroundColor="Transparent"
                                         StrokeThickness="1" 
                                         StrokeColor="Black" 
@@ -296,6 +296,15 @@
                 </VerticalStackLayout>
             </Grid>
 
+            <!-- Indeterminate Transfer -->
+            <mmlcontrols:TransferProgressIndicator 
+                TransferImageL="{Binding IndeterminateTransferImageL}"
+                TransferImageR="{Binding IndeterminateTransferImageR}"
+                TransferBarHeight="{Binding IndeterminateTransferBarHeight}"
+                TransferImageWidth="{Binding IndeterminateTransferImageWidth}"
+                IsVisible="{Binding DialogType, Converter={StaticResource PlatformConverter}, ConverterParameter={x:Static vm:FlexiDialogType.IndeterminateTransfer}}" />
+
+            <!-- Buttons -->
             <Grid>
                 <Grid.ColumnSpacing>10</Grid.ColumnSpacing>
                 <Grid.ColumnDefinitions>

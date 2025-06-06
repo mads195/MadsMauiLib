@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Mads195.MadsMauiLib.Controls.ScreenTitle"
              x:Name="self">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotEqualConverter x:Key="IsNotEqualConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
     <Grid Padding="{Binding Source={x:Reference self}, Path=Padding}" BackgroundColor="{Binding Source={x:Reference self}, Path=BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding Source={x:Reference self}, Path=ImageColumnWidth}"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <Image
@@ -15,7 +24,11 @@
             Aspect="{Binding Source={x:Reference self}, Path=ImageAspect}"
             HeightRequest="{Binding Source={x:Reference self}, Path=ImageHeight}"
             WidthRequest="{Binding Source={x:Reference self}, Path=ImageWidth}"
-            HorizontalOptions="Start"/>
+            HorizontalOptions="Start">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={x:Reference self}, Path=ImageCommand}" CommandParameter="{Binding Source={x:Reference self}, Path=ImageCommandParameter}" NumberOfTapsRequired="1" />
+            </Image.GestureRecognizers>
+        </Image>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -31,7 +44,8 @@
                 VerticalTextAlignment="End"
                 BackgroundColor="Transparent" 
                 FontSize="{Binding Source={x:Reference self}, Path=TitleFontSize}"
-                FontAttributes="{Binding Source={x:Reference self}, Path=TitleFontAttributes}" />
+                FontAttributes="{Binding Source={x:Reference self}, Path=TitleFontAttributes}">
+            </Label>
 
             <HorizontalStackLayout Grid.Row="1">
                 <Label
@@ -41,8 +55,27 @@
                     VerticalTextAlignment="Start"
                     BackgroundColor="Transparent" 
                     FontSize="{Binding Source={x:Reference self}, Path=BylineFontSize}"
-                    FontAttributes="{Binding Source={x:Reference self}, Path=BylineFontAttributes}"/>
+                    FontAttributes="{Binding Source={x:Reference self}, Path=BylineFontAttributes}"
+                    LineBreakMode="WordWrap" />
             </HorizontalStackLayout>
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={x:Reference self}, Path=TitleCommand}" CommandParameter="{Binding Source={x:Reference self}, Path=TitleCommandParameter}" NumberOfTapsRequired="1" />
+            </Grid.GestureRecognizers>
         </Grid>
+
+        <ImageButton
+            Grid.Column="2"
+            Padding="4"
+            Source="{Binding Source={x:Reference self}, Path=EndImageSource}" 
+            HeightRequest="{Binding Source={x:Reference self}, Path=EndImageHeight}"
+            WidthRequest="{Binding Source={x:Reference self}, Path=EndImageWidth}"
+            VerticalOptions="Center"
+            HorizontalOptions="End"
+            IsVisible="{Binding Source={x:Reference self}, Path=EndImageSource, Converter={StaticResource IsNotEqualConverter}, ConverterParameter=''}">
+            <ImageButton.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={x:Reference self}, Path=EndImageCommand}" CommandParameter="{Binding Source={x:Reference self}, Path=EndImageCommandParameter}" NumberOfTapsRequired="1" />
+            </ImageButton.GestureRecognizers>
+        </ImageButton>
     </Grid>
 </ContentView>
