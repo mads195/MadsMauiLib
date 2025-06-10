@@ -14,7 +14,8 @@ public partial class FlexiDialog : Popup
         
         Opened += OnOpened;
     }
-    async void OnOpened(object? sender, PopupOpenedEventArgs e)
+    //async void OnOpened(object? sender, PopupOpenedEventArgs e)
+    async void OnOpened(object? sender, EventArgs e)
     {
         await ((FlexiDialogViewModel)BindingContext).OnOpened();
     }

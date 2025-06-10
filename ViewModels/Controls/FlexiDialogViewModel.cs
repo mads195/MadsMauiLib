@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -94,7 +95,7 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
         public ObservableCollection<int> Minutes { get; } = new ObservableCollection<int>(Enumerable.Range(0, 60));
 
         private readonly SemaphoreSlim semaphoneSlimUpdateMessage = new(1, 1);
-        internal readonly IPopupService popupService;
+        private readonly IPopupService popupService;
         public FlexiDialogViewModel(IPopupService popupService)
         {
             this.popupService = popupService;
@@ -114,6 +115,7 @@ namespace Mads195.MadsMauiLib.ViewModels.Controls
                 {
                     FlexiDialogResponse oFlexiDialogResponseZ = await PrepareReturnValue(FlexiDialogButton.Cancel);
                     popupService.ClosePopup(oFlexiDialogResponseZ);
+                    //await popupService.ClosePopupAsync(oFlexiDialogResponseZ);
                 }
                 catch (Exception ex)
                 {

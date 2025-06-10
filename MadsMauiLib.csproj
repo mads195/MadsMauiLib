@@ -20,9 +20,9 @@
 		<PackageId>Mads195.$(AssemblyName)</PackageId>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>Mads195.MadsMauiLib</RootNamespace>
-		<AssemblyVersion>1.0.280</AssemblyVersion>
-		<FileVersion>1.0.280</FileVersion>
-		<Version>1.0.280</Version>
+		<AssemblyVersion>1.0.290</AssemblyVersion>
+		<FileVersion>1.0.290</FileVersion>
+		<Version>1.0.290</Version>
 		<WindowsPackageType>None</WindowsPackageType>
 		<Configurations>Debug;Release;Release - net8.0</Configurations>
 		<Authors>Mads195</Authors>
@@ -53,7 +53,8 @@
 		
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="*" Condition="'$(TargetFramework)' == 'net9.0-android' Or '$(TargetFramework)' == 'net9.0-ios' Or '$(TargetFramework)' == 'net9.0-maccatalyst' Or '$(TargetFramework)' == 'net9.0-windows10.0.19041.0'" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.*" Condition="'$(TargetFramework)' == 'net8.0-android' Or '$(TargetFramework)' == 'net8.0-ios' Or '$(TargetFramework)' == 'net8.0-maccatalyst' Or '$(TargetFramework)' == 'net8.0-windows10.0.19041.0'" />
-		
+
+    <!--<PackageReference Include="CommunityToolkit.Maui" Version="11.2.*" Condition="'$(TargetFramework)' == 'net9.0-android' Or '$(TargetFramework)' == 'net9.0-ios' Or '$(TargetFramework)' == 'net9.0-maccatalyst' Or '$(TargetFramework)' == 'net9.0-windows10.0.19041.0'" />-->
 		<PackageReference Include="CommunityToolkit.Maui" Version="*" Condition="'$(TargetFramework)' == 'net9.0-android' Or '$(TargetFramework)' == 'net9.0-ios' Or '$(TargetFramework)' == 'net9.0-maccatalyst' Or '$(TargetFramework)' == 'net9.0-windows10.0.19041.0'" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.*" Condition="'$(TargetFramework)' == 'net8.0-android' Or '$(TargetFramework)' == 'net8.0-ios' Or '$(TargetFramework)' == 'net8.0-maccatalyst' Or '$(TargetFramework)' == 'net8.0-windows10.0.19041.0'" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />

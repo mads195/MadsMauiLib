@@ -12,7 +12,7 @@ MadsMauiLib is a library for the Mads195 Maui Framework. It is a collection of c
 - A control that shows a continuously travelling indicator (image or solid colour) moving from left-to-right to indicate that activity is happening.
 
 **LabelItem**
-- Label item is a control that displays a label and a value. The label is on the left and the value is on the right. The label can be a string or a bindable property. A bindable command can be used to execute a command when the label is tapped. TextEndDisplayStyle can be set between Text or Badge where Badge can be used to display a count such as notifications.
+- Label item is a control that displays a label and a value. The label is on the left and the value is on the right. The label can be a string or a bindable property. A bindable command can be used to execute a command when the label is tapped. TextEndDisplayStyle can be set between Text or Badge where Badge can be used to display a count such as notifications. Updated to allow font size, opacity and isvisible on the TextStart and TextEnd elements.
 
 **TransferProgressIndicator**
 - A control that gives a visual indication that something is being transferred from one point to another. E.g. a file upload. Left and right images can be specified.
