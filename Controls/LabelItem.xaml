@@ -28,6 +28,9 @@
                BackgroundColor="Transparent" 
                Grid.Column="0" 
                TextColor="{Binding Source={x:Reference self}, Path=TextStartColor}"
+               FontSize="{Binding Source={x:Reference self}, Path=TextStartFontSize}"
+               IsVisible="{Binding Source={x:Reference self}, Path=TextStartIsVisible}"
+               Opacity="{Binding Source={x:Reference self}, Path=TextStartOpacity}"
                FontAttributes="{Binding Source={x:Reference self}, Path=TextStartFontAttributes}"
                Padding="{Binding Source={x:Reference self}, Path=InternalPaddingStart}" />
         <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent" Spacing="10" Padding="{Binding Source={x:Reference self}, Path=InternalPaddingEnd}">
@@ -35,6 +38,8 @@
                    Text="{Binding Source={x:Reference self}, Path=TextEnd}" 
                    HorizontalTextAlignment="End"
                    TextColor="{Binding Source={x:Reference self}, Path=TextEndColor}"
+                   FontSize="{Binding Source={x:Reference self}, Path=TextEndFontSize}"
+                   Opacity="{Binding Source={x:Reference self}, Path=TextEndOpacity}"
                    FontAttributes="{Binding Source={x:Reference self}, Path=TextEndFontAttributes}"
                    IsVisible="{Binding Source={x:Reference self}, Path=TextEndDisplayStyle, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static controls:DisplayStyle.Text}}"/>
 

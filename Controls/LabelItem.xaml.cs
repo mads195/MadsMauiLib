@@ -7,7 +7,8 @@ namespace Mads195.MadsMauiLib.Controls;
 public enum DisplayStyle
 {
     Text,
-    Badge
+    Badge,
+    NoEndText
 }
 public partial class LabelItem : ContentView
 {
@@ -45,6 +46,21 @@ public partial class LabelItem : ContentView
     public static readonly BindableProperty TextEndDisplayStyleProperty =
         BindableProperty.Create(nameof(TextEndDisplayStyle), typeof(DisplayStyle), typeof(LabelItem), DisplayStyle.Text,
             propertyChanged: OnTextEndDisplayStyleChanged);
+
+    public static readonly BindableProperty TextStartFontSizeProperty =
+        BindableProperty.Create(nameof(TextStartFontSize), typeof(double), typeof(LabelItem), 12);
+
+    public static readonly BindableProperty TextStartIsVisibleProperty =
+        BindableProperty.Create(nameof(TextStartIsVisible), typeof(bool), typeof(LabelItem), true);
+
+    public static readonly BindableProperty TextStartOpacityProperty =
+    BindableProperty.Create(nameof(TextStartOpacity), typeof(double), typeof(LabelItem), 1.0);
+
+    public static readonly BindableProperty TextEndFontSizeProperty =
+        BindableProperty.Create(nameof(TextEndFontSize), typeof(double), typeof(LabelItem), 12);
+
+    public static readonly BindableProperty TextEndOpacityProperty =
+    BindableProperty.Create(nameof(TextEndOpacity), typeof(double), typeof(LabelItem), 1.0);
 
     public static readonly BindableProperty HighlightColorProperty =
         BindableProperty.Create(nameof(HighlightColor), typeof(Color), typeof(LabelItem), Color.FromArgb("#cccccc"));
@@ -134,6 +150,31 @@ public partial class LabelItem : ContentView
     {
         get => (Color)GetValue(HighlightColorProperty);
         set => SetValue(HighlightColorProperty, value);
+    }
+    public double TextStartFontSize
+    {
+        get => (double)GetValue(TextStartFontSizeProperty);
+        set => SetValue(TextStartFontSizeProperty, value);
+    }
+    public bool TextStartIsVisible
+    {
+        get => (bool)GetValue(TextStartIsVisibleProperty);
+        set => SetValue(TextStartIsVisibleProperty, value);
+    }
+    public double TextStartOpacity
+    {
+        get => (double)GetValue(TextStartOpacityProperty);
+        set => SetValue(TextStartOpacityProperty, value);
+    }
+    public double TextEndFontSize
+    {
+        get => (double)GetValue(TextEndFontSizeProperty);
+        set => SetValue(TextEndFontSizeProperty, value);
+    }
+    public double TextEndOpacity
+    {
+        get => (double)GetValue(TextEndOpacityProperty);
+        set => SetValue(TextEndOpacityProperty, value);
     }
     public Thickness InternalPaddingStart
     {
