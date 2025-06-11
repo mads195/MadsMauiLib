@@ -12,7 +12,7 @@
             <ColumnDefinition Width="40" />
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="0" Source="{Binding Source={x:Reference self}, Path=TransferImageL}" WidthRequest="{Binding TransferImageWidth}" />
+        <Image Grid.Column="0" Source="{Binding Source={x:Reference self}, Path=TransferImageL}" WidthRequest="{Binding Source={x:Reference self}, Path=TransferImageWidth}" />
         <mmlcontrols:IndeterminateProgressBar Grid.Column="1" HeightRequest="{Binding Source={x:Reference self}, Path=TransferBarHeight}" />
         <Image Grid.Column="2" Source="{Binding Source={x:Reference self}, Path=TransferImageR}" WidthRequest="{Binding Source={x:Reference self}, Path=TransferImageWidth}" />
     </Grid>
