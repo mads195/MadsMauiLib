@@ -48,7 +48,7 @@ public partial class LabelItem : ContentView
             propertyChanged: OnTextEndDisplayStyleChanged);
 
     public static readonly BindableProperty TextStartFontSizeProperty =
-        BindableProperty.Create(nameof(TextStartFontSize), typeof(double), typeof(LabelItem), 12);
+        BindableProperty.Create(nameof(TextStartFontSize), typeof(int), typeof(LabelItem), 12);
 
     public static readonly BindableProperty TextStartIsVisibleProperty =
         BindableProperty.Create(nameof(TextStartIsVisible), typeof(bool), typeof(LabelItem), true);
@@ -57,7 +57,7 @@ public partial class LabelItem : ContentView
     BindableProperty.Create(nameof(TextStartOpacity), typeof(double), typeof(LabelItem), 1.0);
 
     public static readonly BindableProperty TextEndFontSizeProperty =
-        BindableProperty.Create(nameof(TextEndFontSize), typeof(double), typeof(LabelItem), 12);
+        BindableProperty.Create(nameof(TextEndFontSize), typeof(int), typeof(LabelItem), 12);
 
     public static readonly BindableProperty TextEndOpacityProperty =
     BindableProperty.Create(nameof(TextEndOpacity), typeof(double), typeof(LabelItem), 1.0);
@@ -151,9 +151,9 @@ public partial class LabelItem : ContentView
         get => (Color)GetValue(HighlightColorProperty);
         set => SetValue(HighlightColorProperty, value);
     }
-    public double TextStartFontSize
+    public int TextStartFontSize
     {
-        get => (double)GetValue(TextStartFontSizeProperty);
+        get => (int)GetValue(TextStartFontSizeProperty);
         set => SetValue(TextStartFontSizeProperty, value);
     }
     public bool TextStartIsVisible
@@ -166,9 +166,9 @@ public partial class LabelItem : ContentView
         get => (double)GetValue(TextStartOpacityProperty);
         set => SetValue(TextStartOpacityProperty, value);
     }
-    public double TextEndFontSize
+    public int TextEndFontSize
     {
-        get => (double)GetValue(TextEndFontSizeProperty);
+        get => (int)GetValue(TextEndFontSizeProperty);
         set => SetValue(TextEndFontSizeProperty, value);
     }
     public double TextEndOpacity
