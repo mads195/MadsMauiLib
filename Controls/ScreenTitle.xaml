@@ -64,18 +64,21 @@
             </Grid.GestureRecognizers>
         </Grid>
 
-        <ImageButton
-            Grid.Column="2"
-            Padding="4"
-            Source="{Binding Source={x:Reference self}, Path=EndImageSource}" 
-            HeightRequest="{Binding Source={x:Reference self}, Path=EndImageHeight}"
-            WidthRequest="{Binding Source={x:Reference self}, Path=EndImageWidth}"
-            VerticalOptions="Center"
-            HorizontalOptions="End"
-            IsVisible="{Binding Source={x:Reference self}, Path=EndImageSource, Converter={StaticResource IsNotEqualConverter}, ConverterParameter=''}">
-            <ImageButton.GestureRecognizers>
+        <Grid Grid.Column="2" 
+              IsVisible="{Binding Source={x:Reference self}, Path=EndImageSource, Converter={StaticResource IsNotEqualConverter}, ConverterParameter=''}"
+              Padding="4"
+              VerticalOptions="Center"
+              HorizontalOptions="End">
+            <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding Source={x:Reference self}, Path=EndImageCommand}" CommandParameter="{Binding Source={x:Reference self}, Path=EndImageCommandParameter}" NumberOfTapsRequired="1" />
-            </ImageButton.GestureRecognizers>
-        </ImageButton>
+            </Grid.GestureRecognizers>
+
+            <Image
+                Source="{Binding Source={x:Reference self}, Path=EndImageSource}" 
+                HeightRequest="{Binding Source={x:Reference self}, Path=EndImageHeight}"
+                WidthRequest="{Binding Source={x:Reference self}, Path=EndImageWidth}"
+                VerticalOptions="Center"
+                HorizontalOptions="End" />
+        </Grid>
     </Grid>
 </ContentView>
